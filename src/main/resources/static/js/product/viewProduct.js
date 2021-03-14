@@ -40,7 +40,10 @@ layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate']
                     , "productNumber": res.item.productNumber
                     , "productDesc": res.item.productDesc
                     , "productStatus": res.item.productStatus
+                    ,"productKind":res.item.productKind
+                    ,"productImgName":res.item.productImgName
                 });
+
                 // var d = res.item.productDate;
                 // console.log(d)
                 // //时间模板

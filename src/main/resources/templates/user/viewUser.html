@@ -71,7 +71,14 @@
         </div>
     </form>
 </div>
+<button class="layui-icon layui-btn layui-btn-normal" id="window-comeback">&#xe65c;</button>
 <script src="/static/layui/layui.js" charset="utf-8"></script>
 <script src="/static/js/user/viewUser.js"></script>
+<script>
+    var windowComeback = document.getElementById('window-comeback');
+    windowComeback.addEventListener('click', function () {
+        window.history.back(-1);
+    });
+</script>
 </body>
 </html>

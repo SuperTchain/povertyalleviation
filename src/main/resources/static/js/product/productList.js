@@ -212,5 +212,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
         //         //刷新父窗口
         window.parent.location.reload();
     });
+
+
 })
 

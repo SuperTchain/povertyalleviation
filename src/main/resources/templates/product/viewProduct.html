@@ -34,6 +34,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">图片</label>
+            <div class="layui-input-block">
+                <img id="productImgName" src="">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">产品名称</label>
             <div class="layui-input-block">
                 <input type="text" name="productName" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
@@ -84,11 +90,18 @@
             </div>
         </div>
         <div style="display: none" id="productId" th:text="${session.productId}"></div>
-        <a href="/index" class="layui-btn">返回主页</a>
+<!--        <a href="/index" class="layui-btn">返回主页</a>-->
     </form>
 </div>
+<button class="layui-icon layui-btn layui-btn-normal" id="window-comeback">&#xe65c;</button>
 <script src="/static/layui/layui.js" charset="utf-8"></script>
 <script src="/static/js/product/viewProduct.js"></script>
 <script src="/static/js/date.js"></script>
+<script>
+    var windowComeback = document.getElementById('window-comeback');
+    windowComeback.addEventListener('click', function () {
+        window.history.back(-1);
+    });
+</script>
 </body>
 </html>

@@ -19,13 +19,13 @@
                     <li class="layui-nav-item"><a href="/product/toProductList" target="main">产品列表</a></li>
                     <li class="layui-nav-item"><a href="/order/toOrdertList" target="main">订单列表</a></li>
                     <li class="layui-nav-item"><a href="" target="main">数据统计</a></li>
-                    <li class="layui-nav-item">
-                        <dl class="layui-nav-child">
-                            <dd><a href="">邮件管理</a></dd>
-                            <dd><a href="">消息管理</a></dd>
-                            <dd><a href="">授权管理</a></dd>
-                        </dl>
-                    </li>
+<!--                    <li class="layui-nav-item">-->
+<!--                        <dl class="layui-nav-child">-->
+<!--                            <dd><a href="">邮件管理</a></dd>-->
+<!--                            <dd><a href="">消息管理</a></dd>-->
+<!--                            <dd><a href="">授权管理</a></dd>-->
+<!--                        </dl>-->
+<!--                    </li>-->
                 </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -35,7 +35,7 @@
                     <span sec:authentication="principal.username"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/user/toViewUser" class="basicElement">基本资料</a></dd>
+                    <dd><a href="/user/toViewUser" class="basicElement" target="main">基本资料</a></dd>
                     <dd><a href="">设置</a></dd>
                 </dl>
             </li>
@@ -77,15 +77,15 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" class="layui-icon layui-icon-set-fill">菜单管理</a>
+                    <a href="javascript:;" class="layui-icon layui-icon-set-fill">订单管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/menu/toMenuList" target="main" class="layui-icon layui-icon-list">菜单列表</a></dd>
+                        <dd><a href="/menu/toMenuList" target="main" class="layui-icon layui-icon-list">订单列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-icon layui-icon-date">购物车管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/user/toShoppingCar" target="main" class="layui-icon layui-icon-form">购物车商品信息</a></dd>
+                        <dd><a href="/user/toShoppingCar" target="main" class="layui-icon layui-icon-form">购物车列表</a></dd>
                     </dl>
                 </li>
             </ul>
