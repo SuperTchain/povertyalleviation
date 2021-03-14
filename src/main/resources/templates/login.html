@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+        <meta charset="UTF-8">
+        <title>登录界面</title>
+        <link rel="stylesheet" href="/static/layui/css/layui.css">
+        <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+<body>
+<form class="layui-form" action="/login" method="post">
+    <div class="container">
+        <!--        用户名上方图片-->
+        <div class="layui-form-mid layui-word-aux">
+            <img id="logoid" src="/static/img/loginlogo.png" height="27">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="account" lay-verify="title" placeholder="请输入用户名" autocomplete="off"
+                       class="layui-input">
+                <!-- 获取异常session-->
+                <span th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message} "  style="color: red"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密 &nbsp;&nbsp;码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="title" placeholder="请输入密码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">验证码</label>
+            <div class="layui-input-inline">
+                <input type="text" name="code" id="validate" lay-verify="validate" placeholder="请输入验证码" autocomplete="off"
+                       class="layui-input verity">
+            </div>
+            <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
+            <!--验证码是通过后台生成的-->
+            <img th:src="@{/getCode}" onclick="changeCode()" type="button" id="codeImg">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">记住我</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="remember-me" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="submitlogin">登陆</button>
+            </div>
+        </div>
+        <div><a href="forget.html" class="font-set" style="float:left">忘记密码?</a></div>
+        <div><a href="/index" class="font-set" style="float:left">返回主页</a></div>
+    </div>
+    </div>
+</form>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/login.js"></script>
+</body>
+</html>

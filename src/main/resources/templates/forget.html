@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>找回界面</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/css/findPwd.css">
+</head>
+<body>
+<div class="layui-row" style="display:flex;justify-content:center;">
+    <form class="layui-form" action="/updatePwd" method="post">
+        <div class="container">
+            <div class="layui-form-item">
+                <label class="layui-form-label">账号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="account" lay-verify="title" autocomplete="off" placeholder="请输入账号"
+                           id="account"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password" lay-verify="pass" autocomplete="off" placeholder="请输入密码"
+                           id="pass"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">确认密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password2" lay-verify="confirmPass" autocomplete="off" placeholder="请确认输入密码"
+                           id="pass2"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">获取验证码</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="code" id="validate" lay-verify="title" placeholder="请输入验证码"
+                           autocomplete="off"
+                           class="layui-input verity">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
+                <!--验证码是通过后台生成的-->
+                <button onclick="getValidateCode()" type="button" class="layui-btn" name="btnSendCode" id="btnSendCode">获取验证码</button>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" lay-submit="" lay-filter="updatePwd">修改密码</button>
+                    <a href="/index" class="layui-btn">返回主页</a>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/findPwd.js"></script>
+</body>
+</html>

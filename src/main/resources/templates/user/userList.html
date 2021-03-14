@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+<body>
+<div style="margin-top: 20px;margin-left: 20px;">
+    <!--多条件查询的搜索-->
+    用户搜索:
+    <div class="layui-inline">
+        <!--autocomplete="off":禁止浏览器自动填充内容-->
+        <input id="userid" name="userid" placeholder="用户ID" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-inline">
+        <!--autocomplete="off":禁止浏览器自动填充内容-->
+        <input id="username" name="username" placeholder="用户姓名" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-inline">
+        <!--autocomplete="off":禁止浏览器自动填充内容-->
+        <input id="account" name="account" placeholder="用户账号" autocomplete="off" class="layui-input">
+    </div>
+    <button id="search" type="button" class="layui-btn">
+        <i class="layui-icon layui-icon-search"></i> 搜索
+    </button>
+</div>
+
+<!--主体表格-->
+<table class="layui-hide" id="userList" lay-filter="userTable"></table>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="head-option">
+    <a class="layui-btn" lay-event="add">添加用户</a>
+    <a class="layui-btn layui-btn-danger" lay-event="delete">删除</a>
+</script>
+<!--进行性别的转换-->
+<script type="text/html" id="tansforgender">
+    {{#if (d.gender == 1) { }}
+    <span>男</span>
+    {{# }else if(d.gender == 0){ }}
+    <span>女</span>
+    {{# } }}
+</script>
+<!--进行角色的转换-->
+<!--<script type="text/html" id="tarnsfor_roleid">-->
+<!--    {{#if (d.roleId == 1) { }}-->
+<!--    <span>管理员</span>-->
+<!--    {{# }else if(d.roleId == 2){ }}-->
+<!--    <span>普通用户</span>-->
+<!--    {{# }else if(d.roleId == 3){ }}-->
+<!--    <span>经理</span>-->
+<!--    {{# }else if(d.roleId == 4){ }}-->
+<!--    <span>销售</span>-->
+<!--    {{# } }}-->
+<!--</script>-->
+
+</body>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/user/userList.js"></script>
+</html>

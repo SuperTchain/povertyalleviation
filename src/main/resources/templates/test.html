@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table style="border: #00F7DE" border="1px">
+    <thead  >
+    <tr>用户id </tr>
+    <tr>用户名字 </tr>
+    <tr>用户昵称 </tr>
+    <tr>用户账号 </tr>
+    <tr>用户密码 </tr>
+    <tr>用户性别 </tr>
+    <tr>用户年龄 </tr>
+    <tr>用户邮箱 </tr>
+    <tr>用户角色 </tr>
+    <tr>第几个 </tr>
+    <tr>脚标 </tr>
+    </thead>
+    <tbody>
+    <tr th:each="v,stat:${userList}">
+        <td th:text="${v.id}"></td>
+        <td th:text="${v.userName}"></td>
+        <td th:text="${v.nickName}"></td>
+        <td th:text="${v.account}"></td>
+        <td th:text="${v.password}"></td>
+        <td th:text="${v.gender}"></td>
+        <td th:text="${v.age}"></td>
+        <td th:text="${v.email}"></td>
+        <td th:text="${v.roleId}"></td>
+        <td th:text="${stat.count}"></td>
+        <td th:text="${stat.index}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

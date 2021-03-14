@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lx.povertyalleviation.dao.PolicyDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lx.povertyalleviation.pojo.Policy">
+        <id column="id" property="id"/>
+        <result column="policyTitle" property="policyTitle"/>
+        <result column="policyContent" property="policyContent"/>
+        <result column="publisher" property="publisher"/>
+        <result column="source" property="source"/>
+        <result column="viewed" property="viewed"/>
+        <result column="publishTime" property="publishTime"/>
+        <result column="policyKind" property="policyKind"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, policyTitle, policyContent, publisher, `source`, viewed, publishTime,policyKind
+    </sql>
+    <!--分页查询所有政策信息-->
+    <select id="findAllPolicyList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from policy limit #{start},#{limit}
+    </select>
+
+    <!--查询政策总数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*)
+        from policy
+    </select>
+    <!--根据搜索条件查询政策-->
+    <select id="search" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from policy
+        <where>
+            <if test="policyTitle!=null">
+                and policyTitle like '%${polityTitle}%'
+            </if>
+            <if test="publisher!=''">
+                and publisher like '%${publisher}%'
+            </if>
+            <if test="startTime!=null and endTime!=null">
+                and publishTime between #{startTime} and #{endTime}
+            </if>
+        </where>
+        limit #{start},#{limit}
+
+    </select>
+    <!--根据搜索条件查询政策数量-->
+    <select id="searchCountLike" resultType="java.lang.Integer">
+        select count(*) from policy
+        <where>
+            <if test="policyTitle!=null">
+                and policyTitle like '%${policyTitle}%'
+            </if>
+            <if test="publisher!=''">
+                and publisher like '%${publisher}%'
+            </if>
+        </where>
+    </select>
+    <!--添加政策-->
+    <insert id="addPolicy" parameterType="com.lx.povertyalleviation.pojo.Policy">
+        insert into policy(policyTitle, policyContent, publisher, source, viewed, publishTime)
+        values (#{policyTitle}, #{policyContent}, #{publisher}, #{source}, #{0}, #{publishTime})
+    </insert>
+    <!--根据政策Id查询该政策信息-->
+    <select id="findPolicyById" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from policy where id=#{id}
+    </select>
+    <!--根据政策类别查询该政策信息-->
+    <select id="findAllPolicyByKind" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from policy where policyKind=#{policyKind} limit #{start},#{limit}
+    </select>
+
+    <!--根据政策类别查询政策总数-->
+    <select id="selectCountByKind" resultType="java.lang.Integer">
+        select count(*)
+        from policy where policyKind=#{policyKind}
+    </select>
+
+    <!--根据政策id进行批量删除-->
+    <delete id="batchDeleteByPolicyId">
+        delete from policy where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--根据政策id进行删除-->
+    <delete id="deleteById">
+        delete
+        from policy
+        where id = #{id}
+    </delete>
+    <!--更新政策信息-->
+    <update id="updatePolicy" parameterType="com.lx.povertyalleviation.pojo.Policy">
+        update policy
+        set policyTitle=#{policyTitle},
+            policyContent=#{policyContent},
+            publisher=#{publisher},
+            source=#{source},
+            viewed=#{viewed},
+            publishTime=#{publishTime}
+        where id = #{id}
+    </update>
+</mapper>

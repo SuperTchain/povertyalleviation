@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>添加用户</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+<body>
+<div id="checkFormId">
+
+    <form class="layui-form" action="" id="form1" lay-filter="checkForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">日志ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="userName" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户操作</label>
+            <div class="layui-input-block">
+                <input type="text" name="operation" lay-verify="price" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">操作地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="operationUrl" lay-verify="required" autocomplete="off" readonly="readonly"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">操作日期</label>
+            <div class="layui-input-block">
+                <input id="operationTime" name="operationTime" lay-verify="required" autocomplete="off" readonly="readonly" disabled
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/log/viewLog.js"></script>
+<script src="/static/js/date.js"></script>
+</body>
+</html>

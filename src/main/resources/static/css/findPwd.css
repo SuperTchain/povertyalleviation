@@ -1,0 +1,18 @@
+body {
+    background-image: url("/static/img/products/carousel.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+/*输入框透明*/
+.layui-form-item .layui-input-block input{
+    background-color: transparent;
+    border: 0px;
+}
+
+
+.layui-form{
+    width: 30%;
+    margin-top: 120px;
+}

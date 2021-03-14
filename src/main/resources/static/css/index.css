@@ -1,0 +1,103 @@
+body {
+    /*background-image: url("/static/img/loginlogo.png");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+/* 导航条背景色 */
+.my-nav {
+    background-color: #fff;
+}
+
+/* 子菜单 */
+.my-nav .layui-nav-child {
+    background-color: #fff;
+}
+
+/* a标签文字颜色 */
+.my-nav .layui-nav-item a {
+    color: #eeeeee;
+}
+
+/* 选中项和鼠标浮动颜色 */
+.my-nav .layui-this a, .my-nav .layui-nav-item a:hover {
+    color: #FD482C;
+}
+
+.my-center {
+    padding: 20px 0px 0px 20px;
+}
+
+.my-hover:hover {
+    color: #FD482C;
+}
+
+.layui-header .my-header-li {
+    float: left;
+    padding: 1em;
+    list-style: none;
+    font-size: 20px;
+}
+
+/*搜索框*/
+.my-select {
+    /*水平居中*/
+    text-align-last: center;
+    -moz-text-align-last: right; /* 兼容 Firefox*/
+    margin-top: 40px;
+}
+
+/*选项字体大小*/
+.my-nav-fontsize a {
+    font-size: 14px;
+}
+
+/*div背景色*/
+.my-div-color{
+    background-color: #86858c;
+}
+
+/*字体背景色*/
+.my-nav .layui-nav-item .my-font-color a {
+    color: #86858c;
+}
+
+/*图标背景色*/
+.my-logo-color{
+    color: #eeeeee;
+}
+
+/*选择框宽度*/
+.layui-form-select {
+    width: 310px;
+}
+
+/*div行内对齐*/
+.my-inlinn-div{
+    padding: 0 0 0 20px;
+    float: left;
+}
+
+/*搜索框大小*/
+.my-select-logo-size .layui-icon{
+    font-size: 30px;
+}
+
+
+.layui-footer a{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.layui-footer .my-md{
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 40px;
+}

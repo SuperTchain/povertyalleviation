@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lx.povertyalleviation.dao.OrderDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lx.povertyalleviation.pojo.Order">
+        <id column="id" property="id" />
+        <result column="orderCreateTime" property="orderCreateTime" />
+        <result column="orderDeliveryTime" property="orderDeliveryTime" />
+        <result column="productName" property="productName" />
+        <result column="number" property="number" />
+        <result column="orderStatus" property="orderStatus" />
+        <result column="userId" property="userId" />
+        <result column="payStatus" property="payStatus" />
+        <result column="orderEndTime" property="orderEndTime" />
+        <result column="address" property="address" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, orderCreateTime, orderDeliveryTime, productName, `number`, orderStatus, userId, payStatus, orderEndTime, address
+    </sql>
+
+    <!--分页查询所有订单信息-->
+    <select id="findAllOrderByPage" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from `order` limit #{start},#{limit}
+    </select>
+
+    <!--查询订单总数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from `order`;
+    </select>
+    <!--根据搜索条件查询订单-->
+    <select id="search" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from `order`
+        <where>
+            <if test="orderId!=null">
+                and id like '%${orderId}%'
+            </if>
+            <if test="productName!=''">
+                and productName like '%${productName}%'
+            </if>
+            <if test="orderStatus!=''">
+                and orderStatus like '%${orderStatus}%'
+            </if>
+        </where>
+        limit #{start},#{limit}
+
+    </select>
+    <!--根据搜索条件查询订单数量-->
+    <select id="searchCountLike"  resultType="java.lang.Integer">
+        select count(*)  from `order`
+        <where>
+            <if test="orderId!=null">
+                and id like '%${orderId}%'
+            </if>
+            <if test="productName!=''">
+                and productName like '%${productName}%'
+            </if>
+            <if test="orderStatus!=''">
+                and orderStatus like '%${orderStatus}%'
+            </if>
+        </where>
+    </select>
+    <!--添加订单-->
+    <insert id="addOrder" parameterType="com.lx.povertyalleviation.pojo.Order">
+        insert into `order`(orderCreateTime, orderDeliveryTime, productName, number, orderStatus, userId, payStatus, orderEndTime, address)
+        values(#{orderCreateTime},#{orderDeliveryTime},#{productName},#{number},#{orderStatus},#{userId},#{payStatus},#{orderEndTime},#{address})
+    </insert>
+    <!--根据订单Id查询该订单信息-->
+    <select id="findOrderById" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from `order` where id=#{id}
+    </select>
+    <!--根据订单id进行批量删除-->
+    <delete id="batchDeleteByOrderId">
+        delete from `order` where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--根据订单id进行删除-->
+    <delete id="deleteById">
+        delete from `order` where id=#{id}
+    </delete>
+    <!--更新订单信息-->
+    <update id="updateOrder" parameterType="com.lx.povertyalleviation.pojo.Order">
+        update `order` set orderStatus=#{orderStatus},payStatus=#{payStatus},orderEndTime=#{orderEndTime} where id=#{id}
+    </update>
+</mapper>

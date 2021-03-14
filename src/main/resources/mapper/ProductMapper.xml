@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lx.povertyalleviation.dao.ProductDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lx.povertyalleviation.pojo.Product">
+        <id column="id" property="id" />
+        <result column="productName" property="productName" />
+        <result column="productPrice" property="productPrice" />
+        <result column="productionAddress" property="productionAddress" />
+        <result column="productNumber" property="productNumber" />
+        <result column="productDesc" property="productDesc" />
+        <result column="productStatus" property="productStatus" />
+        <result column="productImgName" property="productImgName" />
+        <result column="productKind" property="productKind" />
+        <result column="hotSaleStatus" property="hotSaleStatus" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, productName, productPrice, productionAddress, productNumber, productDesc, productStatus,productImgName,productKind,hotSaleStatus
+    </sql>
+    <!--分页查询所有产品信息-->
+    <select id="findAllProductByPage" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from product limit #{start},#{limit}
+    </select>
+
+
+    <!--根据条件查询所有产品信息-->
+    <select id="findAllProductByCondition" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from product
+        <where>
+            <if test="productKind!=null">
+                and productKind = #{productKind}
+            </if>
+            <if test="hotSaleStatus!=null">
+                and hotSaleStatus = ${hotSaleStatus}
+            </if>
+        </where>
+        limit #{start},#{limit}
+    </select>
+
+    <!--查询产品总数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from product;
+  </select>
+
+    <!--根据条件查询产品信息-->
+    <select id="selectCountByCondition" resultType="integer">
+        select count(*) from product
+        <where>
+            <if test="productKind!=null">
+                and productKind= #{productKind}
+            </if>
+            <if test="hotSaleStatus!=null">
+                and hotSaleStatus = ${hotSaleStatus}
+            </if>
+        </where>
+    </select>
+
+    <!--根据搜索条件查询产品-->
+    <select id="search" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from product
+        <where>
+            <if test="productId!=null">
+                and id like '%${productId}%'
+            </if>
+            <if test="productName!=''">
+                and productName like '%${productName}%'
+            </if>
+            <if test="productKind!=''">
+                and productKind like '%${productKind}%'
+            </if>
+        </where>
+        limit #{start},#{limit}
+
+    </select>
+    <!--根据搜索条件查询产品数量-->
+    <select id="searchCountLike"  resultType="java.lang.Integer">
+        select count(*)  from product
+        <where>
+            <if test="productId!=null">
+                and id like '%${productId}%'
+            </if>
+            <if test="productName!=''">
+                and productName like '%${productName}%'
+            </if>
+            <if test="productKind!=''">
+                and productKind like '%${productKind}%'
+            </if>
+        </where>
+    </select>
+    <!--添加产品-->
+    <insert id="addProduct" parameterType="com.lx.povertyalleviation.pojo.Product">
+        insert into product(productName, productPrice, productionAddress, productNumber, productDesc, productStatus,productKind,hotSaleStatus)
+         values(#{productName},#{productPrice},#{productionAddress},#{productNumber},#{productDesc},#{productStatus},#{productKind},#{hotSaleStatus})
+    </insert>
+    <!--根据产品Id查询该产品信息-->
+    <select id="findProductById" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from product where id=#{id}
+    </select>
+    <!--根据产品id进行批量删除-->
+    <delete id="batchDeleteByProductId">
+        delete from product where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--根据产品id进行删除-->
+    <delete id="deleteById">
+        delete from product where id=#{id}
+    </delete>
+    <!--更新产品信息-->
+    <update id="updateProduct" parameterType="com.lx.povertyalleviation.pojo.Product">
+        update product set productName=#{productName},productPrice=#{productPrice},productionAddress=#{productionAddress},productNumber=#{productNumber},
+        productDesc=#{productDesc},productStatus=#{productStatus},productKind=#{productKind},hotSaleStatus=#{hotSaleStatus} where id=#{id}
+    </update>
+
+<!--    查询购物车信息-->
+    <select id="findAllShoppingCar" resultMap="BaseResultMap">
+        select * from product
+    </select>
+</mapper>

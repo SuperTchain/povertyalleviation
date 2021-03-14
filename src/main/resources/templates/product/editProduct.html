@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>添加用户</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+<body>
+<div id="checkFormId">
+
+    <form class="layui-form" action="/product/updateProduct" id="form1" lay-filter="checkForm" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="productName" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品价格</label>
+            <div class="layui-input-block">
+                <input type="text" name="productPrice" lay-verify="price" lay-reqtext="不能为空哦" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">生产地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="productionAddress" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">生产日期</label>
+            <div class="layui-input-block">
+                <input id="productDate" name="productDate" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="productNumber" lay-verify="number" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="productDesc" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品状态</label>
+            <div class="layui-input-block">
+                <input type="radio" name="productStatus" value="1" title="有货" checked="">
+                <input type="radio" name="productStatus" value="0" title="售罄">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit_product">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/static/js/product/editProduct.js"></script>
+<script src="/static/js/date.js"></script>
+</body>
+</html>

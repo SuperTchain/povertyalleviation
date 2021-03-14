@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lx.povertyalleviation.dao.LogDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lx.povertyalleviation.pojo.Log">
+        <id column="id" property="id" />
+        <result column="userName" property="userName" />
+        <result column="operation" property="operation" />
+        <result column="operationUrl" property="operationUrl" />
+        <result column="operationTime" property="operationTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, userName, operation, operationUrl, operationTime
+    </sql>
+    <!--插入记录-->
+    <insert id="insertLog" parameterType="com.lx.povertyalleviation.pojo.Log">
+        insert into log(userName,operation,operationUrl,operationTime) values(#{username},#{methodOperation},#{urlOperation},#{operationTime})
+    </insert>
+    <!--分页查询所有日志信息-->
+    <select id="findAllLogByPage" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from log limit #{start},#{limit}
+    </select>
+
+    <!--查询日志总数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from log;
+  </select>
+    <!--根据日志id进行批量删除-->
+    <delete id="batchDeleteByLogId">
+        delete from log where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--根据搜索条件查询日志-->
+    <select id="search" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include>
+        from log
+        <where>
+            <if test="userName!=''">
+                and userName like '%${userName}%'
+            </if>
+            <if test="startTime!=null and endTime!=null">
+                and operationTime between #{startTime} and #{endTime}
+            </if>
+        </where>
+        limit #{start},#{limit}
+
+    </select>
+    <!--根据搜索条件查询日志数量-->
+    <select id="searchCountLike"  resultType="java.lang.Integer">
+        select count(*)  from log
+        <where>
+            <if test="userName!=''">
+                and userName like '%${userName}%'
+            </if>
+            <if test="startTime!=null and endTime!=null">
+                and operationTime between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+    <!--根据产品Id查询该日志信息-->
+    <select id="findLogById" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from log where id=#{id}
+    </select>
+    <!--根据日志id进行删除-->
+    <delete id="deleteById">
+        delete from log where id=#{id}
+    </delete>
+</mapper>
