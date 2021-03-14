@@ -33,12 +33,26 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">生产日期</label>
+        <label class="layui-form-label">产品种类</label>
         <div class="layui-input-block">
-            <input id="productDate" name="productDate" lay-verify="required" autocomplete="off" placeholder="请点击右侧空白选择时间"
-                   class="layui-input">
+            <select name="productKind" lay-verify="required">
+                <option value=""></option>
+                <option value="0">水果</option>
+                <option value="1">农产品</option>
+                <option value="2">家畜</option>
+            </select>
         </div>
     </div>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="productImg" style="margin-left: 30px">上传图片</button>
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" id="imgUrl">
+            <p id="demoText"></p>
+            <input type="hidden" name="productImgName" id="uploadName">
+        </div>
+    </div>
+
+
     <div class="layui-form-item">
         <label class="layui-form-label">产品数量</label>
         <div class="layui-input-block">

@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * @author lx
  * @version 1.0
@@ -40,6 +43,20 @@ public class PolicyController {
     @ApiOperation(value = "跳转到政策信息列表界面")
     public String toPolicyList1() {
         return "policy/PolicyList1";
+    }
+
+
+    /**
+     * 跳转到查看产品界面
+     * @return 界面
+     */
+    @GetMapping("/toViewPolicy")
+    @ApiOperation(value = "跳转到查看政策界面")
+    public String toViewPolicy(HttpServletRequest request){
+        String productId = request.getParameter("id");
+        HttpSession session = request.getSession();
+        session.setAttribute("policyId",productId);
+        return "policy/viewPolicy";
     }
 
     /**
@@ -75,16 +92,7 @@ public class PolicyController {
         return "policy/addPolicy";
     }
 
-    /**
-     * 跳转到查看政策界面
-     *
-     * @return 界面
-     */
-    @GetMapping("/toViewPolicy")
-    @ApiOperation(value = "跳转到查看政策界面")
-    public String toViewPolicy() {
-        return "policy/viewPolicy";
-    }
+
 
     @GetMapping("/toEditPolicy")
     @ApiOperation(value = "跳转到编辑界面")

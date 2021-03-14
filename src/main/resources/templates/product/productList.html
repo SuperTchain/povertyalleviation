@@ -18,10 +18,10 @@
         <!--autocomplete="off":禁止浏览器自动填充内容-->
         <input id="productName" name="productName" placeholder="产品名称" autocomplete="off" class="layui-input">
     </div>
-    <div class="layui-inline">
-        <!--autocomplete="off":禁止浏览器自动填充内容-->
-        <input id="timerange" name="timerange" placeholder="请选择具体时间"  autocomplete="off" class="layui-input">
-    </div>
+<!--    <div class="layui-inline">-->
+<!--        &lt;!&ndash;autocomplete="off":禁止浏览器自动填充内容&ndash;&gt;-->
+<!--        <input id="productKind" name="productKind" placeholder="产品类别"  autocomplete="off" class="layui-input">-->
+<!--    </div>-->
     <button id="search" type="button" class="layui-btn">
         <i class="layui-icon layui-icon-search"></i> 搜索
     </button>
@@ -45,6 +45,22 @@
     <span>有货</span>
     {{# }else if(d.productStatus == 0){ }}
     <span>售罄</span>
+    {{# } }}
+</script>
+<script type="text/html" id="transfor_productKind">
+    {{#if (d.productKind == 0) { }}
+    <span>水果</span>
+    {{# }else if(d.productKind == 1){ }}
+    <span>农产品</span>
+    {{# }else if(d.productKind == 2){ }}
+    <span>家畜</span>
+    {{# } }}
+</script>
+<script type="text/html" id="transfor_hotSaleStatus">
+    {{#if (d.hotSaleStatus == 1) { }}
+    <span>是</span>
+    {{# }else if(d.hotSaleStatus == 0){ }}
+    <span>否</span>
     {{# } }}
 </script>
 </body>

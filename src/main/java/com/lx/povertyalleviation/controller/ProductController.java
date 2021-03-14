@@ -9,13 +9,16 @@ import io.swagger.annotations.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Random;
 
 /**
  * @ClassName ProductController
@@ -72,6 +75,20 @@ public class ProductController {
         session.setAttribute("productId",productId);
         return "product/viewProduct";
     }
+
+    /**
+     * 跳转到查看产品界面(登陆后)
+     * @return 界面
+     */
+    @GetMapping("/toViewProductAfterLogin")
+    @ApiOperation(value = "跳转到查看产品界面（登录后）")
+    public String toViewProductAfterLogin(HttpServletRequest request){
+//        String productId = request.getParameter("id");
+//        HttpSession session = request.getSession();
+//        session.setAttribute("productId",productId);
+        return "product/viewProductAfterLogin";
+    }
+
 
     @GetMapping("/toEditProduct")
     @ApiOperation(value = "跳转到编辑界面")
@@ -263,5 +280,51 @@ public class ProductController {
         Result result = productService.findProductByCondition(productKind,hotSaleStatus,page,limit);
         logger.info("根据条件查找产品成功" + result);
         return result;
+    }
+
+
+
+    @PostMapping("/upload")
+    @ResponseBody
+    public Result uploadFile(@RequestParam("file") MultipartFile uploadFile) throws FileNotFoundException {
+        Result result = new Result();
+
+        //获得项目的类路径
+        String path = ResourceUtils.getURL("classpath:").getPath();
+        //空文件夹在编译时不会打包进入target中
+        File uploadDir = new File(path+"/static/img/products");
+        if (!uploadDir.exists()) {
+            System.out.println("上传路径不存在，正在创建...");
+            uploadDir.mkdir();
+        }
+        if ( uploadFile != null) {
+            //获得上传文件的文件名
+            String oldName = uploadFile.getOriginalFilename();
+            //生成随机数作为文件名
+            String hash = Integer.toHexString(new Random().nextInt());
+            String realName=hash+oldName;
+            System.out.println("[上传的文件名]：" + realName);
+            //我的文件保存在static目录下的products
+            File productImgUrl = new File(path + "/static/img/products" , realName);
+            try {
+                //保存图片
+                uploadFile.transferTo(productImgUrl);
+                //返回成功结果，附带文件的相对路径
+                result.setStatus(200);
+                result.setMessage("上传成功");
+                result.setItem(realName);
+                return result;
+            }catch (IOException e) {
+                e.printStackTrace();
+                result.setStatus(400);
+                result.setMessage("上传失败");
+                return result;
+            }
+        }else {
+            System.out.println("上传的文件为空");
+            result.setStatus(300);
+            result.setMessage("上传的文件为空");
+            return result;
+        }
     }
 }

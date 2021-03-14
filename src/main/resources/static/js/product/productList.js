@@ -35,18 +35,25 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
             {type: 'checkbox', fixed: 'left'}
             , {field: 'id', title: '产品ID', sort: true}
             , {field: 'productName', title: '产品名称'}
-            , {field: 'productPrice', title: '产品价格',sort:true}
-            , {field: 'productionAddress', title: '生产地址'}
-            , {
-                field: 'productDate', title: '生产日期',sort:true
-                , templet: function (d) {
-                    return showTime(d.productDate);
+            ,{field: 'productImgName', title: '产品图片',width:120,height:200
+                ,templet:function(d){
+                    return "<img src='/static/img/products/"+d.productImgName+"' style='width: 300px;height: 300px;'/>"
                 }
             }
+            , {field: 'productPrice', title: '产品价格',sort:true}
+            , {field: 'productionAddress', title: '生产地址'}
+            // , {
+            //     field: 'productDate', title: '生产日期',sort:true
+            //     , templet: function (d) {
+            //         return showTime(d.productDate);
+            //     }
+            // }
             //unresize:true设置为true，代表不能拖动，默认是false，都能拖动
             , {field: 'productNumber', title: '产品数量',sort:true}
             , {field: 'productDesc', title: '产品描述'}
             , {field: 'productStatus', title: '产品状态', templet: '#transfor_productStatus'}
+            , {field: 'productKind', title: '产品类型', templet: '#transfor_productKind'}
+            , {field: 'hotSaleStatus', title: '是否热销', templet: '#transfor_hotSaleStatus'}
             , {fixed: 'right', width: 170, toolbar: '#barDemo'}
         ]]
     });
@@ -119,10 +126,12 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
             productid = {
                 productid: data.id,
             };
+            console.info(id)
             layer.open({
                 //0（信息框，默认）1（页面层）2（iframe层)
                 type: 2,
-                content: "/product/toViewProduct",
+                content: "/product/toViewProductAfterLogin",
+                data: {"id":id},
                 title: "查看界面",
                 area: ["60%", "60%"],//控制宽高
                 shadeClose: true,//点击外部窗口关闭
@@ -160,6 +169,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
                 //0（信息框，默认）1（页面层）2（iframe层)
                 type: 2,
                 content: "/product/toEditProduct",
+                data: {"id":id},
                 title: "编辑界面",
                 area: ["60%", "60%"],//控制宽高
                 shadeClose: true,//点击外部窗口关闭
@@ -170,11 +180,11 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
     });
     //时间的实例化
     //执行一个laydate实例
-    laydate.render({
-        elem: '#timerange', //指定元素
-        range: "~",//定义分割字符
-        type: "datetime" //date:日期   datetime:日期和时间
-    });
+    // laydate.render({
+    //     elem: '#timerange', //指定元素
+    //     range: "~",//定义分割字符
+    //     type: "datetime" //date:日期   datetime:日期和时间
+    // });
 
     //根据条件进行搜索
     $("#search").click(function () {
@@ -184,7 +194,8 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
             where: { //设定异步数据接口的额外参数
                 productId: $("#productId").val(),
                 productName: $("#productName").val(),
-                timerange: $("#timerange").val()
+                // timerange: $("#timerange").val()
+                productKind:$("#productKind").val()
             }
             , page: {
                 curr: 1 //重新从第 1 页开始

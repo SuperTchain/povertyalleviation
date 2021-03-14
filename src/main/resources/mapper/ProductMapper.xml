@@ -30,11 +30,11 @@
     <select id="findAllProductByCondition" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from product
         <where>
-            <if test="productKind!=null">
+            <if test="productKind!=''">
                 and productKind = #{productKind}
             </if>
             <if test="hotSaleStatus!=null">
-                and hotSaleStatus = ${hotSaleStatus}
+                and hotSaleStatus = #{hotSaleStatus}
             </if>
         </where>
         limit #{start},#{limit}
@@ -49,7 +49,7 @@
     <select id="selectCountByCondition" resultType="integer">
         select count(*) from product
         <where>
-            <if test="productKind!=null">
+            <if test="productKind!=''">
                 and productKind= #{productKind}
             </if>
             <if test="hotSaleStatus!=null">
@@ -93,8 +93,8 @@
     </select>
     <!--添加产品-->
     <insert id="addProduct" parameterType="com.lx.povertyalleviation.pojo.Product">
-        insert into product(productName, productPrice, productionAddress, productNumber, productDesc, productStatus,productKind,hotSaleStatus)
-         values(#{productName},#{productPrice},#{productionAddress},#{productNumber},#{productDesc},#{productStatus},#{productKind},#{hotSaleStatus})
+        insert into product(productName, productPrice, productionAddress, productNumber, productDesc, productStatus,productKind,productImgName)
+         values(#{productName},#{productPrice},#{productionAddress},#{productNumber},#{productDesc},#{productStatus},#{productKind},#{productImgName})
     </insert>
     <!--根据产品Id查询该产品信息-->
     <select id="findProductById" resultMap="BaseResultMap">

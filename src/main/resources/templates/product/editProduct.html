@@ -40,13 +40,13 @@
                        class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">生产日期</label>
-            <div class="layui-input-block">
-                <input id="productDate" name="productDate" lay-verify="required" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label">生产日期</label>-->
+<!--            <div class="layui-input-block">-->
+<!--                <input id="productDate" name="productDate" lay-verify="required" autocomplete="off"-->
+<!--                       class="layui-input">-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="layui-form-item">
             <label class="layui-form-label">产品数量</label>
             <div class="layui-input-block">
@@ -67,6 +67,21 @@
             <div class="layui-input-block">
                 <input type="radio" name="productStatus" value="1" title="有货" checked="">
                 <input type="radio" name="productStatus" value="0" title="售罄">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">产品类别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="productKind" value="0" title="水果" checked="">
+                <input type="radio" name="productKind" value="1" title="农产品">
+                <input type="radio" name="productKind" value="2" title="家畜">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否热销</label>
+            <div class="layui-input-block">
+                <input type="radio" name="hotSaleStatus" value="0" title="否" checked="">
+                <input type="radio" name="hotSaleStatus" value="1" title="是">
             </div>
         </div>
         <div class="layui-form-item">

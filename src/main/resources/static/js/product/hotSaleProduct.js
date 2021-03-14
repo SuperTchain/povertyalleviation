@@ -48,7 +48,7 @@ layui.use(['element','carousel','layer', 'element', 'form','laypage'], function 
         $.ajax({
             async: false,
             url: '/product/findProductByCondition',
-            data: {"productKind":null,"hotSaleStatus":0,"page": page, "limit": limit},
+            data: {"productKind":null,"hotSaleStatus":1,"page": page, "limit": limit},
             dataType: 'json',
             type:"post",
             success: function(result){

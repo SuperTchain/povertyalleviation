@@ -30,23 +30,25 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
                     , "productNumber": res.item.productNumber
                     , "productDesc": res.item.productDesc
                     , "productStatus": res.item.productStatus
+                    , "productKind": res.item.productKind
+                    , "hotSaleStatus": res.item.hotSaleStatus
                 });
-                var d = res.item.productDate;
+                // var d = res.item.productDate;
                 console.log(d)
                 //时间模板
-                templet: function f(data) {
-                    return showTime(data);
-                }
-                try {
-                    laydate.render({
-                        elem: '#productDate'
-                        ,type: 'datetime'
-                        , value: f(d)
-                        ,trigger: 'click',
-                    });
-                } catch (e) {
-                    $("#productDate").val(d);
-                }
+                // templet: function f(data) {
+                //     return showTime(data);
+                // }
+                // try {
+                //     laydate.render({
+                //         elem: '#productDate'
+                //         ,type: 'datetime'
+                //         , value: f(d)
+                //         ,trigger: 'click',
+                //     });
+                // } catch (e) {
+                //     $("#productDate").val(d);
+                // }
             }
             form.render()
         }
