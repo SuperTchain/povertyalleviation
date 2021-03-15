@@ -107,8 +107,9 @@ public class LoginController {
     @PostMapping("/regist")
     @ApiOperation(value = "用户注册")
     @RecordOperation(name = "用户注册", url = "/regist")
-    public String regist(@ApiParam(name = "user", value = "用户实体类") User user) {
-        Result result = userService.addUser(user);
+    public String regist(@ApiParam(name = "user", value = "用户实体类") User user,HttpServletRequest request) {
+        Integer roleId = Integer.valueOf(request.getParameter("roleId"));
+        Result result = userService.addUser(user,roleId);
         logger.info("成功注册用户");
         return "login";
     }

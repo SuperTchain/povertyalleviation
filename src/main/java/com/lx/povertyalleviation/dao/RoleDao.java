@@ -1,6 +1,7 @@
 package com.lx.povertyalleviation.dao;
 
 import com.lx.povertyalleviation.pojo.Role;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface RoleDao {
      * @param account 用户账号
      * @return
      */
-    Integer addRoleInfo(String account);
+    Integer addRoleInfo(@Param("account") String account,@Param("roleId")  Integer roleId);
 }

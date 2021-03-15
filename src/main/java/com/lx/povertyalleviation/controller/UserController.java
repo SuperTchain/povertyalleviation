@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * @ClassName UserController
@@ -148,8 +150,9 @@ public class UserController {
     @ApiOperation(value = "添加用户")
     @RecordOperation(name = "添加用户",url = "/user/addUser")
     @Secured({"ROLE_SALES","ROLE_ADMIN","ROLE_MANAGE"})
-    public Result addUser(@ApiParam(name = "user", value = "用户实体类") User user) {
-        Result result = userService.addUser(user);
+    public Result addUser(@ApiParam(name = "user", value = "用户实体类") User user, HttpServletRequest request) {
+        Integer roleId = Integer.valueOf(request.getParameter("roleId"));
+        Result result = userService.addUser(user,roleId);
         logger.info("成功添加用户");
         result.setStatus(200);
 

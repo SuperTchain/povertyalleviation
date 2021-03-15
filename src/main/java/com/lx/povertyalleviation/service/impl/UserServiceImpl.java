@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -133,14 +134,15 @@ public class UserServiceImpl implements UserService {
      * @return result结果
      */
     @Override
-    public Result addUser(User user) {
+    @Transactional(rollbackFor=Exception.class)
+    public Result addUser(User user,Integer roleId) {
         //对密码进行加密处理
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         logger.info(user.getPassword());
         Result result = new Result();
         try {
             userDao.addUser(user);
-            roleDao.addRoleInfo(user.getAccount());
+            roleDao.addRoleInfo(user.getAccount(), roleId);
             result.setStatus(200);
             result.setItem("添加成功");
         } catch (Exception e) {

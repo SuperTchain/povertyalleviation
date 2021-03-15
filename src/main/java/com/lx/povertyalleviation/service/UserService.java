@@ -52,7 +52,7 @@ public interface UserService extends UserDetailsService {
      * @param user 用户信息
      * @return 结果
      */
-    Result addUser(User user);
+    Result addUser(User user,Integer roleId);
 
     /**
      * 根据用户id批量删除用户

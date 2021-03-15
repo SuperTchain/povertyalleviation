@@ -13,13 +13,18 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, roleName, roleDesc, account, roleId
+        id, roleName, roleDesc, `account`, roleId
     </sql>
     <select id="findRoleByAccount" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from role where account=#{account}
     </select>
 
     <insert id="addRoleInfo" parameterType="String">
-        insert into role(roleName, roleDesc,account,roleId) value ('ROLE_USER','普通用户',#{account},2)
+        insert into role(roleName, roleDesc,account,roleId) value (
+            <choose>
+                <when test="roleId==2">'ROLE_USER','普通用户',#{account},2</when>
+                <when test="roleId==3">'ROLE_SALES','商家',#{account},3</when>
+            </choose>
+            )
     </insert>
 </mapper>
