@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import redis.clients.jedis.Jedis;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author lx
@@ -44,9 +45,13 @@ public class ShoppingCarController {
      * @return
      */
     @PostMapping("/addToShoppingCar")
-    public Result addToShoppingCar(Product product){
+    public Result addToShoppingCar(Product product, HttpServletRequest request){
         Result result = new Result();
         //存放数据
+        String number = request.getParameter("number");
+        //将Id作为key 商品Id作为filed product作为value
+        redisUtil.hset(String.valueOf(product.getId()),String.valueOf(product.getId()),product);
+        logger.info(redisUtil.hget(String.valueOf(product.getId()),String.valueOf(product.getId())));
         return result;
     }
     @RequestMapping("set")

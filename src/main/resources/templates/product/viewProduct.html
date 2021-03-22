@@ -89,6 +89,13 @@
                 <input type="radio" name="productStatus" value="0" title="售罄" disabled>
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">数量</label>
+            <div class="layui-input-block">
+                <input type="text" name="number" lay-verify="required" autocomplete="off" readonly="readonly"
+                       class="layui-input">
+            </div>
+        </div>
         <div style="display: none" id="productId" th:text="${session.productId}"></div>
         <button class="layui-btn" type="submit">加入购物车</button>
     </form>
