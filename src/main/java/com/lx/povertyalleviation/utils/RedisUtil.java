@@ -166,6 +166,16 @@ public class RedisUtil {
     }
 
     /**
+     * 获取key下的所有数据
+     * @param key 键
+     * @return 值
+     */
+    public Object hgetAll(String key){
+        return redisTemplate.opsForHash().entries(key);
+    }
+
+
+    /**
      * 获取hashKey对应的所有键值
      * @param key 键
      * @return 对应的多个键值

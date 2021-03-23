@@ -177,16 +177,6 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
-    @Override
-    public Result findAllShoppingCar() {
-        List<ShoppingCar> allShoppingCar = productDao.findAllShoppingCar();
-        Integer count = productDao.selectCount();
-        Result result = new Result();
-        result.setItem(allShoppingCar);
-        result.setTotal(count);
-        logger.info(allShoppingCar.get(0).getProducName());
-        return result;
-    }
 
     /**
      * 根据条件查找产品

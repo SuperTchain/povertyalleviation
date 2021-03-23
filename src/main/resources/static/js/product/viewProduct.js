@@ -1,4 +1,4 @@
-layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate'], function () {
+layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'], function () {
     var laypage = layui.laypage //分页
         , layer = layui.layer //弹层
         , table = layui.table //表格
@@ -14,9 +14,9 @@ layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate']
     //建造实例
     carousel.render({
         elem: '#test1'
-        ,width: '100%' //设置容器宽度
-        ,arrow: 'always' //始终显示箭头
-        ,height: '500px'
+        , width: '100%' //设置容器宽度
+        , arrow: 'always' //始终显示箭头
+        , height: '500px'
         //,anim: 'updown' //切换动画方式
     });
 
@@ -40,8 +40,8 @@ layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate']
                     , "productNumber": res.item.productNumber
                     , "productDesc": res.item.productDesc
                     , "productStatus": res.item.productStatus
-                    ,"productKind":res.item.productKind
-                    ,"productImgName":res.item.productImgName
+                    , "productKind": res.item.productKind
+                    , "productImgName": res.item.productImgName
                 });
 
                 // var d = res.item.productDate;
@@ -64,5 +64,23 @@ layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate']
             form.render()
         }
     })
+
+    form.on('submit(submit)', function (data) {
+
+
+
+        $.ajax({
+            url: "/shoppingcar/addToShoppingCar",
+            type: "post",
+            data: data.field,
+            success: function (res) {
+                if (res.status = 200) {
+                    layer.alert("添加成功");
+                }
+            }
+        })
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
+
 })
 
