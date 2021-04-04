@@ -7,15 +7,17 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication()
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableTransactionManagement
 @MapperScan(basePackages = "com.lx.povertyalleviation.dao")
 @EnableGlobalMethodSecurity(securedEnabled = true)
+//注意此处一定要添加，否则启动报错，因为我们没有配制数据源
 public class PovertyalleviationApplication {
 
     public static void main(String[] args) {

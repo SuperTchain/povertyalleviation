@@ -254,16 +254,6 @@ public class ProductController {
     }
 
 
-    /**
-     * 查购物车信息
-     * @return
-     */
-    @PostMapping("/getShoppingCar")
-    @ResponseBody
-    public Result getShoppingCar(){
-        Result result = productService.findAllShoppingCar();
-        return result;
-    }
 
 
     @PostMapping("/findProductByCondition")

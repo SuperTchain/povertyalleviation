@@ -60,7 +60,6 @@ public interface ProductService {
     Result updateProduct(Product product);
 
 
-    Result findAllShoppingCar();
 
 
     /**

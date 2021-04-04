@@ -25,7 +25,7 @@
 
 <div id="checkFormId">
 
-    <form class="layui-form" action="/shoppingcar/addToShoppingCar" id="form1" lay-filter="checkForm">
+    <form class="layui-form" action="" id="form1" lay-filter="checkForm" >
         <div class="layui-form-item">
             <label class="layui-form-label">产品ID</label>
             <div class="layui-input-block">
@@ -84,20 +84,20 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">产品状态</label>
-            <div class="layui-input-block">
-                <input type="radio" name="productStatus" value="1" title="有货" checked="" disabled>
+            <div class="layui-input-block layui-input">
+                <input type="radio" name="productStatus" value="1" title="有货" checked="" disabled >
                 <input type="radio" name="productStatus" value="0" title="售罄" disabled>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">数量</label>
             <div class="layui-input-block">
-                <input type="text" name="number" lay-verify="required" autocomplete="off" readonly="readonly"
-                       class="layui-input">
+                <input type="text" name="buyCount" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="display: none" id="productId" th:text="${session.productId}"></div>
-        <button class="layui-btn" type="submit">加入购物车</button>
+        <div style="display: none" id="isLogin" th:text="${session.user}"></div>
+        <button lay-submit lay-filter="submit">加入购物车</button>
     </form>
 </div>
 <button class="layui-icon layui-btn layui-btn-normal" id="window-comeback">&#xe65c;</button>
