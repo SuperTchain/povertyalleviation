@@ -6,6 +6,7 @@ import com.lx.povertyalleviation.service.ShoppingCarService;
 import com.lx.povertyalleviation.utils.RedisUtil;
 import com.lx.povertyalleviation.utils.Result;
 import io.swagger.annotations.Api;
+import io.swagger.models.auth.In;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author lx
@@ -53,11 +55,12 @@ public class ShoppingCarController {
     @PostMapping("/addToShoppingCar")
     @ResponseBody
     @Transactional(rollbackFor=Exception.class)
-    public Result addToShoppingCar(ShoppingCar shoppingCar) {
+    public Result addToShoppingCar(ShoppingCar shoppingCar, HttpSession session) {
         Result result = new Result();
+        Integer userId = (Integer) session.getAttribute("userId");
         try {
             //将Id作为key 商品Id作为filed product作为value
-            boolean b = redisUtil.hset(String.valueOf(shoppingCar.getId()), String.valueOf(shoppingCar.getId()), shoppingCar);
+            boolean b = redisUtil.hset(String.valueOf(userId), String.valueOf(shoppingCar.getId()), shoppingCar);
             if(true==b){
                 result.setStatus(200);
             }

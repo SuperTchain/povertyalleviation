@@ -10,6 +10,7 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
 
 
     let productId = $("#productId").text();
+    let isLogin = $("#isLogin").text();
 
     //建造实例
     carousel.render({
@@ -67,7 +68,9 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
 
     form.on('submit(submit)', function (data) {
 
-
+        if(null==isLogin){
+            layer.alert("请登录");
+        }
 
         $.ajax({
             url: "/shoppingcar/addToShoppingCar",
