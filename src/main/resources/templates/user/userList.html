@@ -48,18 +48,17 @@
     <span>女</span>
     {{# } }}
 </script>
-<!--进行角色的转换-->
-<!--<script type="text/html" id="tarnsfor_roleid">-->
-<!--    {{#if (d.roleId == 1) { }}-->
-<!--    <span>管理员</span>-->
-<!--    {{# }else if(d.roleId == 2){ }}-->
-<!--    <span>普通用户</span>-->
-<!--    {{# }else if(d.roleId == 3){ }}-->
-<!--    <span>经理</span>-->
-<!--    {{# }else if(d.roleId == 4){ }}-->
-<!--    <span>销售</span>-->
-<!--    {{# } }}-->
-<!--</script>-->
+<script type="text/html" id="tansforrole">
+    {{#if (d.roleId == 1) { }}
+    <span>管理员</span>
+    {{# }else if(d.roleId == 2){ }}
+    <span>用户</span>
+    {{# }else if(d.roleId == 3){ }}
+    <span>商家</span>
+    {{# }else if(d.roleId == 4){ }}
+    <span>经理</span>
+    {{# } }}
+</script>
 
 </body>
 <script type="text/javascript" src="/static/layui/layui.js"></script>

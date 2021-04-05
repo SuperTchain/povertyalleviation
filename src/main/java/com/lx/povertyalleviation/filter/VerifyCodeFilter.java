@@ -4,6 +4,7 @@ import com.lx.povertyalleviation.exception.VerifyCodeException;
 import com.lx.povertyalleviation.handler.MyAuthenticationFailHandler;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -55,4 +56,6 @@ public class VerifyCodeFilter extends OncePerRequestFilter {
         }
         request.getSession().removeAttribute("vareficode");
     }
+
+
 }

@@ -7,24 +7,91 @@
         <id column="id" property="id" />
         <result column="roleName" property="roleName" />
         <result column="roleDesc" property="roleDesc" />
-        <result column="account" property="account" />
-        <result column="roleId" property="roleId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, roleName, roleDesc, `account`, roleId
+        id, roleName, roleDesc
     </sql>
-    <select id="findRoleByAccount" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"></include> from role where account=#{account}
+    <select id="findRoleByRoleId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from role where id=#{roleId}
     </select>
 
-    <insert id="addRoleInfo" parameterType="String">
-        insert into role(roleName, roleDesc,account,roleId) value (
-            <choose>
-                <when test="roleId==2">'ROLE_USER','普通用户',#{account},2</when>
-                <when test="roleId==3">'ROLE_SALES','商家',#{account},3</when>
-            </choose>
-            )
+    <insert id="addRoleInfo" parameterType="com.lx.povertyalleviation.pojo.Role">
+        insert into role(roleName, roleDesc) value (#{roleName},#{roleDesc})
     </insert>
+
+    <!--分页查询所有角色信息-->
+    <select id="findAllRoleByPage" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from role limit #{start},#{limit}
+    </select>
+
+    <!--查询角色总数-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*)
+        from role;
+    </select>
+
+    <!--根据搜索条件查询角色-->
+    <select id="search" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from role
+        <where>
+            <if test="roleid!=null">
+                and id like '%${roleid}%'
+            </if>
+            <if test="rolename!=''">
+                and roleName like '%${rolename}%'
+            </if>
+        </where>
+        limit #{start},#{limit}
+
+    </select>
+    <!--根据搜索条件查询角色数量-->
+    <select id="searchCountLike" resultType="java.lang.Integer">
+        select count(*) from role
+        <where>
+            <if test="roleid!=null">
+                and id like '%${roleid}%'
+            </if>
+            <if test="rolename!=''">
+                and roleName like '%${rolename}%'
+            </if>
+        </where>
+    </select>
+    <!--添加角色-->
+    <insert id="addRole" parameterType="com.lx.povertyalleviation.pojo.Role">
+        insert into role(roleName, roleDesc)
+        values (#{roleName}, #{roleDesc})
+    </insert>
+
+    <!--根据角色id进行批量删除-->
+    <delete id="batchDeleteByRoleId">
+        delete from role where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <!--根据角色id进行删除-->
+    <delete id="deleteById">
+        delete
+        from role
+        where id = #{id}
+    </delete>
+    <!--根据角色Id查询该角色信息-->
+    <select id="findRoleById" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from role where id=#{id}
+    </select>
+    <!--更新角色信息-->
+    <update id="updateRole" parameterType="com.lx.povertyalleviation.pojo.Role">
+        update role
+        set roleName=#{roleName},
+            roleDesc=#{roleDesc}
+        where id = #{id}
+    </update>
+    <!--根据账户名查询角色-->
+    <select id="findRoleByName" resultMap="BaseResultMap">
+            select  * from role where id=1
+    </select>
 </mapper>

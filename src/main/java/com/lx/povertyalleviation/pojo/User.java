@@ -67,8 +67,20 @@ public class User implements Serializable,UserDetails {
    @TableField("address")
    private String address;
 
+
+   private Integer roleId;
+
    @ApiModelProperty(value = "角色",example = "Role实体")
    private  List<Role> roles = new ArrayList<>();
+
+
+   public Integer getRoleId() {
+      return roleId;
+   }
+
+   public void setRoleId(Integer roleId) {
+      this.roleId = roleId;
+   }
 
    @Override
    public String toString() {
@@ -82,6 +94,7 @@ public class User implements Serializable,UserDetails {
               ", age=" + age +
               ", email='" + email + '\'' +
               ", address='" + address + '\'' +
+              ", roleId=" + roleId +
               ", roles=" + roles +
               '}';
    }

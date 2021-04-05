@@ -2,27 +2,17 @@ package com.lx.povertyalleviation.config;
 
 import com.lx.povertyalleviation.filter.VerifyCodeFilter;
 import com.lx.povertyalleviation.handler.MyAuthenticationFailHandler;
+import com.lx.povertyalleviation.handler.MyAuthenticationSuccesHandler;
 import com.lx.povertyalleviation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @ClassName SpringSecurityConfig
@@ -43,7 +33,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    private MyAuthenticationFailHandler authenticationFailHandler;
+    private MyAuthenticationSuccesHandler myAuthenticationSuccesHandler;
+
+    @Autowired
+    private MyAuthenticationFailHandler myAuthenticationFailHandler;
 
 
     @Autowired
@@ -82,8 +75,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**","/login.html","/index.html","/forget.html","/regist","/toregist","/search","/webjars/**","/getCode","/login","/","/index",
                         "/getValidateCode","/updatePwd","/product/findAllProduct","/toloadproduct","/user/toShoppingCar","/product/toHotSaleProduct",
                         "/product/toFindProductByKind1","/product/toFindProductByKind2","/product/toFindProductByKind3","/policy/toFindPolicyByPolicyKind1","/policy/toFindPolicyByPolicyKind2","/policy/toFindPolicyByPolicyKind3",
-                        "/product/toViewProduct","/product/findProductByCondition","/product/findProductById","/policy/toViewPolicy","/policy/findPolicyById","/policy/findPolicyByPolicyKind",
-                        "/shoppingcar/addToShoppingCar").permitAll()
+                        "/product/toViewProduct","/product/findProductByCondition","/product/findProductById","/policy/toViewPolicy","/policy/findPolicyById","/policy/findPolicyByPolicyKind"
+                        ).permitAll()
 //                拦截所有页面
 //                .antMatchers("/**").hasAnyRole("USER")
                 .anyRequest()
@@ -101,10 +94,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
 //                成功请求 post请求
                 .successForwardUrl("/main")
-//                .defaultSuccessUrl("/main")
+                .defaultSuccessUrl("/main")
 //                自定义处理器
-//                .failureHandler(authenticationFailHandler)
+//                .failureHandler(myAuthenticationFailHandler)
 //                .failureUrl("/login?error=true")
+                .successHandler(myAuthenticationSuccesHandler)
                 .permitAll()
                 .and()
                 .logout()
@@ -128,4 +122,5 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable();
 
     }
+
 }

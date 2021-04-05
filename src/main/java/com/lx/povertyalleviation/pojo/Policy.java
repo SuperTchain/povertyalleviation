@@ -46,7 +46,7 @@ public class Policy implements Serializable {
 
     @ApiModelProperty(value = "政策类别")
     @TableField("policyKind")
-    private Integer policyKind;
+    private String policyKind;
 
 
     public static long getSerialVersionUID() {
@@ -109,14 +109,13 @@ public class Policy implements Serializable {
         this.publishTime = publishTime;
     }
 
-    public Integer getPolicyKind() {
+    public String getPolicyKind() {
         return policyKind;
     }
 
-    public void setPolicyKind(Integer policyKind) {
+    public void setPolicyKind(String policyKind) {
         this.policyKind = policyKind;
     }
-
 
     @Override
     public String toString() {
@@ -128,7 +127,7 @@ public class Policy implements Serializable {
                 ", source='" + source + '\'' +
                 ", viewed=" + viewed +
                 ", publishTime=" + publishTime +
-                ", policyKind=" + policyKind +
+                ", policyKind='" + policyKind + '\'' +
                 '}';
     }
 }

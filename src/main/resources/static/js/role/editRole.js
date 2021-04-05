@@ -11,7 +11,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element'], function () {
     var id =  parent.editid.editid;
     console.log(id)
     $.ajax({
-        url: "/user/findUserById",
+        url: "/role/findRoleById",
         type: "post",
         data: {
             id: id
@@ -23,14 +23,8 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element'], function () {
                 //给表单赋值
                 form.val("checkForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
                     "id": res.item.id
-                    , "userName": res.item.userName // "name": "value"
-                    , "nickName": res.item.nickName
-                    , "account": res.item.account
-                    , "password": res.item.password
-                    , "gender": res.item.gender
-                    , "age": res.item.age
-                    , "email": res.item.email
-                    ,"roleId": res.item.roleId
+                    , "roleName": res.item.roleName // "name": "value"
+                    , "roleDesc": res.item.roleDesc
                 });
 
             }

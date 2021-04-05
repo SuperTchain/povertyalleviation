@@ -142,7 +142,6 @@ public class UserServiceImpl implements UserService {
         Result result = new Result();
         try {
             userDao.addUser(user);
-            roleDao.addRoleInfo(user.getAccount(), roleId);
             result.setStatus(200);
             result.setItem("添加成功");
         } catch (Exception e) {
@@ -162,6 +161,7 @@ public class UserServiceImpl implements UserService {
      * @return result结果
      */
     @Override
+    @Transactional(rollbackFor=Exception.class)
     public Result batchDeleteByUserId(String[] ids) {
         Result result = new Result();
         try {
@@ -363,6 +363,7 @@ public class UserServiceImpl implements UserService {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             request.getSession().setAttribute("user", userByName);
             request.getSession().setAttribute("userName", userByName.getUserName());
+            request.getSession().setAttribute("userId", userByName.getId());
         }else if (userByName==null){
             throw new MyUsernameNotFoundException("输入的账号有误");
         }

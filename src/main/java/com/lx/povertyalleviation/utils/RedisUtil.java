@@ -176,6 +176,16 @@ public class RedisUtil {
 
 
     /**
+     * 获取Key下的数量
+     * @param key 键
+     * @return 值
+     */
+    public Long hCount(String key){
+        return redisTemplate.opsForHash().size(key);
+    }
+
+
+    /**
      * 获取hashKey对应的所有键值
      * @param key 键
      * @return 对应的多个键值

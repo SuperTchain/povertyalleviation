@@ -38,14 +38,6 @@ public class Role implements Serializable{
     @TableField("roleDesc")
     private String roleDesc;
 
-    @ApiModelProperty(value = "用户账号")
-    @TableId(value = "account")
-    private String account;
-
-    @ApiModelProperty(value = "角色id")
-    @TableId(value = "roleId")
-    private Integer roleId;
-
 
     @Override
     public String toString() {
@@ -53,27 +45,7 @@ public class Role implements Serializable{
                 "id=" + id +
                 ", roleName='" + roleName + '\'' +
                 ", roleDesc='" + roleDesc + '\'' +
-                ", account='" + account + '\'' +
-                ", roleId=" + roleId +
                 '}';
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-
-
-    public void setAccount(String account) {
-        this.account = account;
     }
 
     public static long getSerialVersionUID() {

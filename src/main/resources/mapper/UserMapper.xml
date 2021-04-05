@@ -13,13 +13,14 @@
         <result column="age" property="age"/>
         <result column="email" property="email"/>
         <result column="address" property="address"/>
-        <association property="roles" select="com.lx.povertyalleviation.dao.RoleDao.findRoleByAccount" column="account">
+        <result column="roleId" property="roleId"/>
+        <association property="roles" select="com.lx.povertyalleviation.dao.RoleDao.findRoleByRoleId" column="roleId">
         </association>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, userName, nickName, account, password, gender, age, email,address
+        id, userName, nickName, account, password, gender, age, email,address,roleId
     </sql>
 
     <!--分页查询所有用户信息-->
@@ -69,8 +70,8 @@
     </select>
     <!--添加用户-->
     <insert id="addUser" parameterType="com.lx.povertyalleviation.pojo.User">
-        insert into user(userName, nickName, account, password, gender, age, email,address)
-        values (#{userName}, #{nickName}, #{account}, #{password}, #{gender}, #{age}, #{email},#{address})
+        insert into user(userName, nickName, account, password, gender, age, email,address,roleId)
+        values (#{userName}, #{nickName}, #{account}, #{password}, #{gender}, #{age}, #{email},#{address},#{roleId})
     </insert>
 
     <!--根据用户id进行批量删除-->
@@ -100,7 +101,8 @@
             gender=#{gender},
             age=#{age},
             email=#{email},
-            address=#{address}
+            address=#{address},
+            roleId=#{roleId}
         where id = #{id}
     </update>
     <!--根据账户名查询用户-->

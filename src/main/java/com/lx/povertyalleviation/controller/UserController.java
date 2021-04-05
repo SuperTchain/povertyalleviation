@@ -65,6 +65,7 @@ public class UserController {
      * @return 用户列表界面
      */
     @GetMapping("/toUserList")
+    @Secured({"ROLE_ADMIN","ROLE_MANAGE"})
     @ApiOperation(value = "跳转到用户界面")
     public String tuUserList() {
         return "user/userList";
@@ -88,6 +89,7 @@ public class UserController {
      * @return 查看界面
      */
     @GetMapping("/toViewUser")
+    @Secured({"ROLE_ADMIN","ROLE_MANAGE"})
     @ApiOperation(value = "跳转到查看界面")
     public String toCheckUser() {
         return "user/viewUser";
@@ -99,17 +101,12 @@ public class UserController {
      * @return 编辑界面
      */
     @GetMapping("/toEditUser")
+    @Secured({"ROLE_ADMIN"})
     @ApiOperation(value = "跳转到编辑界面")
     public String toEditUser() {
         return "user/editUser";
     }
 
-
-    @GetMapping("/toShoppingCar")
-    @ApiOperation(value = "跳转到购物车界面")
-    public  String toShoppingCar(){
-        return "user/shoppingCar";
-    }
 
     /**
      * 根据传入的条件进行搜索

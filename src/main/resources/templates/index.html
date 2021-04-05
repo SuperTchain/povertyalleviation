@@ -22,7 +22,7 @@
     <div class="layui-col-xs4">
     </div>
     <div class="layui-col-xs2 layui-col-xs-offset3">
-        <a href="/toLogin">
+        <a href="/main">
             <i class="layui-icon layui-icon-user my-header-li my-logo-color "><span
                     th:text="${session.user !=null ? session.user.userName : '登录'}"></span>
             </i>
@@ -70,10 +70,10 @@
             <!--    </select>-->
         </div>
         <div class="my-header-li my-select-logo-size my-hover" title="搜索" lay-event="LAYTABLE_SEARCH"><i
-                class="layui-icon layui-icon-search"></i></div>
+                class="layui-icon layui-icon-search" id="indexSearch"></i></div>
     </div>
     <div class="layui-icon layui-col-xs4 layui-col-sm12 layui-col-md4 layui-icon-cart my-center"><a
-            href="/user/toShoppingCar" class="my-hover " target="main">购物车</a></div>
+            href="/shoppingcar/toShoppingCar" class="my-hover " target="main">购物车</a></div>
 </div>
 
 <!--选项-->

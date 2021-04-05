@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -63,6 +64,12 @@ public class Order implements Serializable {
     @TableField("address")
     private String address;
 
+
+    private BigDecimal orderPrice;
+
+    @ApiModelProperty(value = "是否发货0未发 1已发")
+    private Integer delivery;
+
     @Override
     public String toString() {
         return "Order{" +
@@ -76,7 +83,25 @@ public class Order implements Serializable {
                 ", payStatus=" + payStatus +
                 ", orderEndTime=" + orderEndTime +
                 ", address='" + address + '\'' +
+                ", orderPrice=" + orderPrice +
+                ", delivery=" + delivery +
                 '}';
+    }
+
+    public Integer getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Integer delivery) {
+        this.delivery = delivery;
+    }
+
+    public BigDecimal getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(BigDecimal orderPrice) {
+        this.orderPrice = orderPrice;
     }
 
     public static long getSerialVersionUID() {

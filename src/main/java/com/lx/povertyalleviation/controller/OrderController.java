@@ -38,7 +38,7 @@ public class OrderController {
     @GetMapping("/toOrdertList")
     @ApiOperation(value = "跳转到订单信息列表界面")
     public String toOrderList() {
-        return "order/OrderList";
+        return "order/orderList";
     }
 
     /**

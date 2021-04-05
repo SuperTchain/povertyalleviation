@@ -1,12 +1,16 @@
 package com.lx.povertyalleviation.service.impl;
 
 import com.lx.povertyalleviation.dao.OrderDao;
+import com.lx.povertyalleviation.dao.UserDao;
 import com.lx.povertyalleviation.pojo.Order;
+import com.lx.povertyalleviation.pojo.User;
 import com.lx.povertyalleviation.service.OrderService;
+import com.lx.povertyalleviation.utils.DateUtil;
 import com.lx.povertyalleviation.utils.Result;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
@@ -27,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
     
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private UserDao userDao;
 
 
     /**
@@ -77,16 +84,22 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 添加订单
-     * @param product 订单实体类
+     * @param order 订单实体类
      * @return 结果
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result addOrder(Order order) {
         Result result = new Result();
         try {
-            orderDao.addOrder(order);
-            result.setStatus(200);
-            result.setItem("添加成功");
+            Integer integer = orderDao.addOrder(order);
+            if (integer>0){
+                result.setStatus(200);
+                result.setItem("添加成功");
+            }else {
+                result.setStatus(500);
+                result.setItem("添加失败");
+            }
         } catch (Exception e) {
             logger.error("错误", e);
             result.setStatus(500);
@@ -156,7 +169,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 更新订单信息
-     * @param product 订单实体类
+     * @param order 订单实体类
      * @return 影响结果
      */
     @Override

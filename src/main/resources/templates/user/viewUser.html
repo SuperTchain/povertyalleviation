@@ -69,6 +69,17 @@
                        class="layui-input">
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色类型</label>
+            <div class="layui-input-block">
+                <select name="roleId" lay-verify="required" disabled >
+                    <option value=""></option>
+                    <option value="1">管理员</option>
+                    <option value="2">用户</option>
+                    <option value="3">商家</option>
+                </select>
+            </div>
+        </div>
     </form>
 </div>
 <button class="layui-icon layui-btn layui-btn-normal" id="window-comeback">&#xe65c;</button>
@@ -79,6 +90,17 @@
     windowComeback.addEventListener('click', function () {
         window.history.back(-1);
     });
+</script>
+<script type="text/html" id="tansforrole">
+    {{#if (d.roleId == 1) { }}
+    <span>管理员</span>
+    {{# }else if(d.roleId == 2){ }}
+    <span>用户</span>
+    {{# }else if(d.roleId == 3){ }}
+    <span>商家</span>
+    {{# }else if(d.roleId == 4){ }}
+    <span>经理</span>
+    {{# } }}
 </script>
 </body>
 </html>

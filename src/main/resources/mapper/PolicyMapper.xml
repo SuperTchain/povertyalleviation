@@ -35,7 +35,7 @@
         from policy
         <where>
             <if test="policyTitle!=null">
-                and policyTitle like '%${polityTitle}%'
+                and policyTitle like '%${policyTitle}%'
             </if>
             <if test="publisher!=''">
                 and publisher like '%${publisher}%'
@@ -57,12 +57,15 @@
             <if test="publisher!=''">
                 and publisher like '%${publisher}%'
             </if>
+            <if test="startTime!=null and endTime!=null">
+                and publishTime between #{startTime} and #{endTime}
+            </if>
         </where>
     </select>
     <!--添加政策-->
     <insert id="addPolicy" parameterType="com.lx.povertyalleviation.pojo.Policy">
-        insert into policy(policyTitle, policyContent, publisher, source, viewed, publishTime)
-        values (#{policyTitle}, #{policyContent}, #{publisher}, #{source}, #{0}, #{publishTime})
+        insert into policy(policyTitle, policyContent, publisher, source, viewed, publishTime,policyKind)
+        values (#{policyTitle}, #{policyContent}, #{publisher}, #{source}, #{viewed}, #{publishTime},#{policyKind})
     </insert>
     <!--根据政策Id查询该政策信息-->
     <select id="findPolicyById" resultMap="BaseResultMap">
@@ -100,7 +103,7 @@
             publisher=#{publisher},
             source=#{source},
             viewed=#{viewed},
-            publishTime=#{publishTime}
+            policyKind=#{policyKind}
         where id = #{id}
     </update>
 </mapper>

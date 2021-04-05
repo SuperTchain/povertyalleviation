@@ -4,6 +4,7 @@ import com.lx.povertyalleviation.dao.PolicyDao;
 import com.lx.povertyalleviation.pojo.Policy;
 import com.lx.povertyalleviation.pojo.Product;
 import com.lx.povertyalleviation.service.PolicyService;
+import com.lx.povertyalleviation.utils.DateUtil;
 import com.lx.povertyalleviation.utils.Result;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,8 @@ public class PolicyServiceImpl implements PolicyService {
     public Result addPolicy(Policy policy) {
         Result result = new Result();
         try {
+            policy.setPublishTime(DateUtil.getNowDate());
+            logger.info(policy);
             policyDao.addPolicy(policy);
             result.setStatus(200);
             result.setItem("添加成功");

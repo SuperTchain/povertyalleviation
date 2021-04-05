@@ -158,12 +158,12 @@ public class LoginController {
      * @param request 请求
      * @return 主界面
      */
-    @PostMapping("/main")
+    @GetMapping("/main")
     @ApiOperation("登录成功跳转到主界面")
     @RecordOperation(name = "登录成功", url = "/login")
     public String main(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute("pwdzq", true);
+        session.setAttribute("", true);
         User user = (User) session.getAttribute("user");
         if (user == null) {
             //没有登录

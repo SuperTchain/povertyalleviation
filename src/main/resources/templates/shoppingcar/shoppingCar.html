@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>购物车界面</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+<body>
+<div style="margin-top: 20px;margin-left: 20px;">
+<!--    &lt;!&ndash;多条件查询的搜索&ndash;&gt;-->
+<!--    已购商品搜索:-->
+<!--    <div class="layui-inline">-->
+<!--        &lt;!&ndash;autocomplete="off":禁止浏览器自动填充内容&ndash;&gt;-->
+<!--        <input id="productId" name="productId" placeholder="产品ID" autocomplete="off" class="layui-input">-->
+<!--    </div>-->
+<!--    <div class="layui-inline">-->
+<!--        &lt;!&ndash;autocomplete="off":禁止浏览器自动填充内容&ndash;&gt;-->
+<!--        <input id="productName" name="productName" placeholder="产品名称" autocomplete="off" class="layui-input">-->
+<!--    </div>-->
+<!--    &lt;!&ndash;    <div class="layui-inline">&ndash;&gt;-->
+<!--    &lt;!&ndash;        &lt;!&ndash;autocomplete="off":禁止浏览器自动填充内容&ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;        <input id="productKind" name="productKind" placeholder="产品类别"  autocomplete="off" class="layui-input">&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <button id="search" type="button" class="layui-btn">-->
+<!--        <i class="layui-icon layui-icon-search"></i> 搜索-->
+<!--    </button>-->
+</div>
+
+<!--主体表格-->
+<table class="layui-hide" id="shoppingCarList" lay-filter="shoppingCarTable">
+</table>
+
+
+
+<div style="display: none" id="userId" th:text="${session.userId}"></div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="pay">去支付</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<!--<script type="text/html" id="head-option">-->
+<!--    <a class="layui-btn" lay-event="add">添加产品</a>-->
+<!--    <a class="layui-btn layui-btn-danger" lay-event="delete">删除</a>-->
+<!--</script>-->
+<script type="text/html" id="transfor_productStatus">
+    {{#if (d.productStatus == 1) { }}
+    <span>有货</span>
+    {{# }else if(d.productStatus == 0){ }}
+    <span>售罄</span>
+    {{# } }}
+</script>
+<script type="text/html" id="transfor_productKind">
+    {{#if (d.productKind == 0) { }}
+    <span>水果</span>
+    {{# }else if(d.productKind == 1){ }}
+    <span>农产品</span>
+    {{# }else if(d.productKind == 2){ }}
+    <span>家畜</span>
+    {{# } }}
+</script>
+<script type="text/html" id="transfor_hotSaleStatus">
+    {{#if (d.hotSaleStatus == 1) { }}
+    <span>是</span>
+    {{# }else if(d.hotSaleStatus == 0){ }}
+    <span>否</span>
+    {{# } }}
+</script>
+</body>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/shoppingcar/shoppingCarList.js"></script>
+<script type="text/javascript" src="/static/js/date.js"></script>
+</html>

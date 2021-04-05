@@ -59,6 +59,23 @@ public class PolicyController {
         return "policy/viewPolicy";
     }
 
+
+
+    @GetMapping("/toPolicyList")
+    @ApiOperation(value = "跳转到政策界面")
+    public String toProductList() {
+        return "policy/policyList";
+    }
+
+    @GetMapping("/toViewPolicy2")
+    @ApiOperation(value = "跳转到政策界面")
+    public String toViewList2() {
+        return "policy/viewPolicy2";
+    }
+
+
+
+
     /**
      * 跳转到扶贫政策信息列表界面
      *
@@ -125,7 +142,7 @@ public class PolicyController {
      * 根据传入条件查询政策信息
      *
      * @param policyTitle 政策ID
-     * @param PolicyName  政策名称
+     * @param publisher  政策名称
      * @param timerange   时间范围
      * @param page        页数
      * @param limit       每页条数
@@ -143,6 +160,7 @@ public class PolicyController {
     )
     @RecordOperation(name = "根据传入条件查询政策信息", url = "/policy/search")
     public Result serachPolicy(String policyTitle, String publisher, String timerange, Integer page, Integer limit) {
+        logger.info(policyTitle+publisher+timerange);
         Result result = policyService.search(policyTitle, publisher, timerange, page, limit);
         logger.info("政策条件搜索查询成功");
         return result;
@@ -152,7 +170,7 @@ public class PolicyController {
     /**
      * 添加政策
      *
-     * @param Policy 政策实体类
+     * @param policy 政策实体类
      * @return 结果
      */
     @PostMapping("/addPolicy")
@@ -244,7 +262,7 @@ public class PolicyController {
     /**
      * 更新用户信息
      *
-     * @param Policy 政策信息
+     * @param policy 政策信息
      * @return 封装结果
      */
     @PostMapping("/updatePolicy")

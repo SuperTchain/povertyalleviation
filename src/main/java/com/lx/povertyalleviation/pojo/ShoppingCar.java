@@ -62,9 +62,13 @@ public class ShoppingCar {
     @TableField("hotSaleStatus")
     private Integer hotSaleStatus;
 
-
+    @ApiModelProperty(value = "购买数量",example = "1")
+    @TableField("buyCount")
     private Integer buyCount;
 
+    @ApiModelProperty(value = "购买数量",example = "1")
+    @TableField("buyCount")
+    private Integer userId;
 
     @Override
     public String toString() {
@@ -80,7 +84,16 @@ public class ShoppingCar {
                 ", productKind='" + productKind + '\'' +
                 ", hotSaleStatus=" + hotSaleStatus +
                 ", buyCount=" + buyCount +
+                ", userId=" + userId +
                 '}';
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public static long getSerialVersionUID() {

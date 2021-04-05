@@ -52,7 +52,7 @@ public interface OrderDao {
 
     /**
      * 添加订单
-     * @param product 订单实体类
+     * @param order 订单实体类
      * @return 结果
      */
     Integer addOrder(Order order);

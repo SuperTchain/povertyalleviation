@@ -1,4 +1,4 @@
-layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate','layedit'], function () {
+layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate', 'layedit'], function () {
     var laypage = layui.laypage //分页
         , layer = layui.layer //弹层
         , table = layui.table //表格
@@ -7,10 +7,9 @@ layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate',
         , e = layui.element //元素操作
         , form = layui.form //表单模块
         , laydate = layui.laydate//时间模块
-        , layedit=layui.layedit
+        , layedit = layui.layedit
 
-
-    let policyId = $("#policyId").text();
+    var policyId = parent.productid.productid
 
     var html = layedit.build('txtComment'); //建立编辑器
 
@@ -19,9 +18,9 @@ layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate',
     //建造实例
     carousel.render({
         elem: '#test1'
-        ,width: '100%' //设置容器宽度
-        ,arrow: 'always' //始终显示箭头
-        ,height: '500px'
+        , width: '100%' //设置容器宽度
+        , arrow: 'always' //始终显示箭头
+        , height: '500px'
         //,anim: 'updown' //切换动画方式
     });
 
@@ -55,9 +54,9 @@ layui.use(['laypage', 'layer', 'carousel','table', 'form', 'element', 'laydate',
                 try {
                     laydate.render({
                         elem: '#publishTime'
-                        ,type: 'datetime'
+                        , type: 'datetime'
                         , value: f(d)
-                        ,trigger: 'click',
+                        , trigger: 'click',
                     });
                 } catch (e) {
                     $("#publishTime").val(d);
