@@ -8,7 +8,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element'], function () {
 
 
     //获取父容器中的id
-    var id =  parent.editid.editid;
+    var id =  $("#userId").text()
     console.log(id)
     $.ajax({
         url: "/user/findUserById",
@@ -30,8 +30,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element'], function () {
                     , "gender": res.item.gender
                     , "age": res.item.age
                     , "email": res.item.email
-                    , "address": res.item.address
-                    ,"roleId": res.item.roleId
+                    ,"address": res.item.address
                 });
 
             }

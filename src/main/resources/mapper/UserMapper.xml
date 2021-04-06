@@ -94,15 +94,35 @@
     <!--更新用户信息-->
     <update id="updateUser" parameterType="com.lx.povertyalleviation.pojo.User">
         update user
-        set userName=#{userName},
-            nickName=#{nickName},
-            account=#{account},
-            password=#{password},
-            gender=#{gender},
-            age=#{age},
-            email=#{email},
-            address=#{address},
-            roleId=#{roleId}
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName!=null">
+                userName=#{userName},
+            </if>
+            <if test="nickName!=null">
+                nickName=#{nickName},
+            </if>
+            <if test="account!=null">
+                account=#{account},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="gender!=null">
+                gender=#{gender},
+            </if>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="email!=null">
+                email=#{email},
+            </if>
+            <if test="address!=null">
+                address=#{address},
+            </if>
+            <if test="roleId!=null">
+                roleId=#{roleId},
+            </if>
+        </trim>
         where id = #{id}
     </update>
     <!--根据账户名查询用户-->

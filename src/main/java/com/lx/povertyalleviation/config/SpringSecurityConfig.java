@@ -56,7 +56,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         //解决静态资源被SpringSecurity拦截的问题
         //这样我的webapp下static里的静态资源就不会被拦截了，也就不会导致我的网页的css全部失效了……
-        web.ignoring().antMatchers("/static/**");
+        web.ignoring().antMatchers("/static/**","/v2/api-docs",//swagger api json
+                "/swagger-resources/configuration/ui",//用来获取支持的动作
+                "/swagger-resources",//用来获取api-docs的URI
+                "/swagger-resources/configuration/security",//安全选项
+                "/swagger-ui.html"
+        );
     }
 
 

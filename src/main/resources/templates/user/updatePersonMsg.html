@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>添加用户</title>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="checkFormId">
-
+    <div style="display: none" id="userId" th:text="${session.userId}"></div>
     <form class="layui-form" action="/user/updateUser" id="form1" lay-filter="checkForm" method="post">
         <div class="layui-form-item">
             <label class="layui-form-label">用户ID</label>
@@ -77,17 +77,6 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">角色类型</label>
-            <div class="layui-input-block">
-                <select name="roleId" lay-verify="required">
-                    <option value=""></option>
-                    <option value="1">管理员</option>
-                    <option value="2">用户</option>
-                    <option value="3">商家</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
             <div class="layui-input-block">
                 <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit_user">修改信息</button>
             </div>
@@ -95,17 +84,6 @@
     </form>
 </div>
 <script src="/static/layui/layui.js" charset="utf-8"></script>
-<script src="/static/js/user/editUser.js"></script>
-<script type="text/html" id="tansforrole">
-    {{#if (d.roleId == 1) { }}
-    <span>管理员</span>
-    {{# }else if(d.roleId == 2){ }}
-    <span>用户</span>
-    {{# }else if(d.roleId == 3){ }}
-    <span>商家</span>
-    {{# }else if(d.roleId == 4){ }}
-    <span>经理</span>
-    {{# } }}
-</script>
+<script src="/static/js/user/updatePersonMsg.js"></script>
 </body>
 </html>

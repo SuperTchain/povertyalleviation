@@ -15,8 +15,8 @@ public class BcryptPasswordEncoder {
     public static void main(String[] args) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        String encode = passwordEncoder.encode("Csmm1234");
-        System.out.println(encode);
+        boolean equals = passwordEncoder.matches("LiXing123456", "$2a$10$XIsk94wWaIr/z/lxju3yVO4bfJiMpfJMInJ/W0vceBhAnTFb7e8/W");
+        System.out.println(equals);
     }
 
 }

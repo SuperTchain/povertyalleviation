@@ -107,6 +107,12 @@ public class UserController {
         return "user/editUser";
     }
 
+    @GetMapping("/toUpdatePersonMsg")
+    @ApiOperation(value = "跳转到编辑界面")
+    public String toUpdatePersonMsg(){
+        return "user/updatePersonMsg";
+    }
+
 
     /**
      * 根据传入的条件进行搜索
