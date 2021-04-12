@@ -4,23 +4,17 @@ import cn.dsna.util.images.ValidateCode;
 import com.lx.povertyalleviation.annotations.RecordOperation;
 import com.lx.povertyalleviation.pojo.User;
 import com.lx.povertyalleviation.service.UserService;
-import com.lx.povertyalleviation.utils.BcryptPasswordEncoder;
 import com.lx.povertyalleviation.utils.DateUtil;
 import com.lx.povertyalleviation.utils.Result;
 import io.swagger.annotations.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -323,5 +317,11 @@ public class LoginController {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
+    }
+
+
+    @GetMapping("/findProductLikeCondition")
+    public String tofindProductLikeCondition(){
+        return "product/findProductLikeCondition";
     }
 }

@@ -15,26 +15,26 @@ layui.use(['element', 'carousel', 'layer', 'element', 'form', 'laypage'], functi
     let textContent = $("#TemplateOptions").textContent;
 
 //根据条件进行搜索
-    $("#indexSearch").click(function () {
-        // $.ajax({
-        //     url: "/findProductByCondition",
-        //     type: "post",
-        //     data: {
-        //         productName: textContent
-        //     },
-        //     success: function (res) {
-        //         if (res.status == 200) {
-        //             //index：layui便于记录弹框的索引
-        //             layer.alert(res.item, function (index) {
-        //                 layer.close(index);//关闭弹框
-        //                 //重载表格
-        //                 user_table.reload();
-        //             })
-        //         }
-        //     }
-        // })
-        alert("测试")
-    })
+//     $("#indexSearch").click(function () {
+//         $.ajax({
+//             url: "/findProductLikeCondition",
+//             type: "post",
+//             data: {
+//                 productName: textContent
+//             },
+//             success: function (res) {
+//                 if (res.status == 200) {
+//                     //index：layui便于记录弹框的索引
+//                     layer.alert(res.item, function (index) {
+//                         layer.close(index);//关闭弹框
+//                         //重载表格
+//                         user_table.reload();
+//                     })
+//                 }
+//             }
+//         })
+//         alert("测试")
+//     })
 
 
 
