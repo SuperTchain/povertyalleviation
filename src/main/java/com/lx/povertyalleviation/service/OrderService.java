@@ -22,12 +22,11 @@ public interface OrderService {
      *
      * @param orderId   订单ID
      * @param productName 产品名称
-     * @param orderStatus 订单状态
      * @param page       开始页面
      * @param limit       每页条数
      * @return 封装结果
      */
-    Result search(Integer orderId, String productName, Integer orderStatus, Integer page, Integer limit);
+    Result search(Integer orderId, String productName,Integer page, Integer limit);
 
 
     /**
@@ -60,8 +59,17 @@ public interface OrderService {
 
     /**
      * 更新订单信息
-     * @param product 订单实体类
+     * @param order 订单实体类
      * @return 影响结果
      */
     Result updateOrder(Order order);
+
+    /**
+     * 根据用户id查询订单
+     * @param id 用户id
+     * @return 结果
+     */
+    Result findOrderByUserId(Integer id,Integer page,Integer limit);
+
+    Result deliveryProduct(Integer orderId);
 }

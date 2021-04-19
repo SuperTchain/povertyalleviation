@@ -12,13 +12,13 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <!--左上角标题-->
-        <div class="layui-logo " >后台管理界面</div>
+        <div class="layui-logo " >扶贫信息管理系统后台界面</div>
                 <!-- 头部区域（可配合layui已有的水平导航） -->
                 <ul class="layui-nav layui-layout-left">
                     <li class="layui-nav-item"><a href="/user/toUserList" target="main">用户列表</a></li>
                     <li class="layui-nav-item"><a href="/product/toProductList" target="main">产品列表</a></li>
                     <li class="layui-nav-item"><a href="/order/toOrdertList" target="main">订单列表</a></li>
-                    <li class="layui-nav-item"><a href="" target="main">数据统计</a></li>
+                    <li class="layui-nav-item"><a href="/analysis/toAnalysis" target="main">数据统计</a></li>
 <!--                    <li class="layui-nav-item">-->
 <!--                        <dl class="layui-nav-child">-->
 <!--                            <dd><a href="">邮件管理</a></dd>-->
@@ -79,6 +79,18 @@
                     <a href="javascript:;" class="layui-icon layui-icon-set-fill">订单管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/order/toOrdertList" target="main" class="layui-icon layui-icon-list">订单详情</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE','ROLE_USER','ROLE_SALES')">
+                    <a href="javascript:;" class="layui-icon layui-icon-set-fill">商家订单管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/order/toOrdertListOfSales" target="main" class="layui-icon layui-icon-list">订单管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE','ROLE_USER','ROLE_SALES')">
+                    <a href="javascript:;" class="layui-icon layui-icon-set-fill">用户订单管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/order/toOrdertListOfUser" target="main" class="layui-icon layui-icon-list">订单管理</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE','ROLE_USER','ROLE_SALES')">

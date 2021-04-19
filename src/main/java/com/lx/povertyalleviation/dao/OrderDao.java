@@ -38,7 +38,7 @@ public interface OrderDao {
      * @param limit       每页条数
      * @return 封装结果
      */
-    List<Order> search(@Param("orderId") Integer orderId, @Param("productName") String productName,@Param("orderStatus")Integer orderStatus,  @Param("start") Integer start, @Param("limit") Integer limit);
+    List<Order> search(@Param("orderId") Integer orderId, @Param("productName") String productName,  @Param("start") Integer start, @Param("limit") Integer limit);
 
     /**
      * 根据传入条件模糊查询数量
@@ -48,7 +48,7 @@ public interface OrderDao {
      * @param orderStatus 订单状态
      * @return 数量
      */
-    Integer searchCountLike(@Param("orderId") Integer orderId, @Param("productName") String productName,@Param("orderStatus")Integer orderStatus);
+    Integer searchCountLike(@Param("orderId") Integer orderId, @Param("productName") String productName);
 
     /**
      * 添加订单
@@ -80,8 +80,19 @@ public interface OrderDao {
 
     /**
      * 更新订单信息
-     * @param product 订单实体类
+     * @param order 订单实体类
      * @return 影响结果
      */
     Integer updateOrder(Order order);
+
+    /**
+     * 根据用户id查询结果
+     * @param id 用户Id
+     * @return 结果
+     */
+    List<Order> findOrderByUserId(@Param("id") Integer id,@Param("start") Integer start, @Param("limit") Integer limit);
+
+    Integer deliveryProduct(Integer orderId);
+
+    Integer selectCountByUserId(Integer id);
 }

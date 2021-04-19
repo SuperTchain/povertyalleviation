@@ -43,9 +43,6 @@
             <if test="productName!=''">
                 and productName like '%${productName}%'
             </if>
-            <if test="orderStatus!=''">
-                and orderStatus like '%${orderStatus}%'
-            </if>
         </where>
         limit #{start},#{limit}
 
@@ -60,9 +57,7 @@
             <if test="productName!=''">
                 and productName like '%${productName}%'
             </if>
-            <if test="orderStatus!=''">
-                and orderStatus like '%${orderStatus}%'
-            </if>
+
         </where>
     </select>
     <!--添加订单-->
@@ -73,6 +68,11 @@
     <!--根据订单Id查询该订单信息-->
     <select id="findOrderById" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from `order` where id=#{id}
+    </select>
+
+    <!--根据用户Id查询订单信息-->
+    <select id="findOrderByUserId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from `order` where userId=#{id}  limit #{start},#{limit}
     </select>
     <!--根据订单id进行批量删除-->
     <delete id="batchDeleteByOrderId">
@@ -89,4 +89,12 @@
     <update id="updateOrder" parameterType="com.lx.povertyalleviation.pojo.Order">
         update `order` set orderStatus=#{orderStatus},payStatus=#{payStatus},orderEndTime=#{orderEndTime},delivery=#{delivery} where id=#{id}
     </update>
+    <!--更新订单状态-->
+    <update id="deliveryProduct" parameterType="java.lang.Integer">
+        update `order` set delivery=1 where id=#{id}
+    </update>
+    <!--根据用户Id查询订单数量-->
+    <select id="selectCountByUserId" resultType="java.lang.Integer">
+        select count(*) from `order` where userId=#{id}
+    </select>
 </mapper>

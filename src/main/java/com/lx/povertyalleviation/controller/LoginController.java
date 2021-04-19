@@ -237,14 +237,15 @@ public class LoginController {
     /**
      * 获取邮箱验证码
      *
-     * @param response 响应
+     * @param session 会话
      * @param request  请求
      */
     @PostMapping("/getValidateCode")
     @ApiOperation("获取邮箱验证码")
     @ResponseBody
-    public Result getValidateCode(HttpServletResponse response, HttpServletRequest request) {
+    public Result getValidateCode(HttpSession session, HttpServletRequest request) {
         String account = request.getParameter("account");
+
         //验证码验证 生产随机数
         String str = "";
         for (int i = 0; i <= 3; i++) {

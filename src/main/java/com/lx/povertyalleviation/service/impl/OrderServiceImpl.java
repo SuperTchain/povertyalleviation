@@ -62,21 +62,20 @@ public class OrderServiceImpl implements OrderService {
      *
      * @param orderId   订单ID
      * @param productName 产品名称
-     * @param orderStatus 订单状态
      * @param page       开始页面
      * @param limit       每页条数
      * @return 封装结果
      */
     @Override
-    public Result search(Integer orderId, String productName, Integer orderStatus, Integer page, Integer limit) {
+    public Result search(Integer orderId, String productName, Integer page, Integer limit) {
         Result result = new Result();
         //计算查询的起始位置
         Integer start = (page - 1) * limit;
         //分页查询所有订单信息
-        List<Order> orders = orderDao.search(orderId, productName, orderStatus,start, limit);
+        List<Order> orders = orderDao.search(orderId, productName, start, limit);
         result.setItem(orders);
         //查询条数
-        Integer count = orderDao.searchCountLike(orderId, productName, orderStatus);
+        Integer count = orderDao.searchCountLike(orderId, productName);
         result.setTotal(count);
         return result;
     }
@@ -178,6 +177,32 @@ public class OrderServiceImpl implements OrderService {
         Result result = new Result();
         result.setStatus(200);
         result.setItem("更新成功");
+        return result;
+    }
+
+
+    @Override
+    public Result findOrderByUserId(Integer id, Integer page, Integer limit) {
+        Result result = new Result();
+        //计算查询的起始位置
+        Integer start = (page - 1) * limit;
+        //分页查询所有订单信息
+        List<Order> orders = orderDao.findOrderByUserId(id, start, limit);
+        result.setItem(orders);
+        //查询条数
+        Integer count = orderDao.selectCountByUserId(id);
+        result.setTotal(count);
+        return result;
+    }
+
+    @Override
+    public Result deliveryProduct(Integer orderId) {
+        Result result = new Result();
+        Integer integer = orderDao.deliveryProduct(orderId);
+        if (integer!=null){
+            result.setStatus(200);
+            result.setItem("发货成功");
+        }
         return result;
     }
 }

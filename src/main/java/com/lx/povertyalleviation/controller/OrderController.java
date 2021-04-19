@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author lx
  * @version 1.0
@@ -22,7 +24,7 @@ public class OrderController {
     /**
      * 开启日志
      */
-    private static Logger logger=Logger.getLogger(OrderController.class);
+    private static Logger logger = Logger.getLogger(OrderController.class);
 
     /**
      * 引入服务
@@ -41,6 +43,19 @@ public class OrderController {
         return "order/orderList";
     }
 
+    @GetMapping("/toOrdertListOfSales")
+    @ApiOperation(value = "跳转到商家订单信息列表界面")
+    public String toOrdertListOfSales() {
+        return "order/ordertListOfSales";
+    }
+
+
+    @GetMapping("/toOrdertListOfUser")
+    @ApiOperation(value = "跳转到用户订单信息列表界面")
+    public String toOrdertListOfUser() {
+        return "order/ordertListOfUser";
+    }
+
     /**
      * 跳转到添加订单界面
      *
@@ -54,17 +69,18 @@ public class OrderController {
 
     /**
      * 跳转到查看订单界面
+     *
      * @return 界面
      */
     @GetMapping("/toViewOrder")
     @ApiOperation(value = "跳转到查看订单界面")
-    public String toViewOrder(){
+    public String toViewOrder() {
         return "order/viewOrder";
     }
 
     @GetMapping("/toEditOrder")
     @ApiOperation(value = "跳转到编辑界面")
-    public String toEditOrder(){
+    public String toEditOrder() {
         return "order/editOrder";
     }
 
@@ -82,7 +98,7 @@ public class OrderController {
             @ApiImplicitParam(name = "page", value = "页数"),
             @ApiImplicitParam(name = "limit", value = "每页页数")
     })
-    @RecordOperation(name = "查询所有订单信息",url = "/order/findAllOrder")
+    @RecordOperation(name = "查询所有订单信息", url = "/order/findAllOrder")
     public Result findAllOrder(Integer page, Integer limit) {
         Result result = orderService.findAllOrderByPage(page, limit);
         logger.info("查询订单列表成功");
@@ -92,10 +108,9 @@ public class OrderController {
     /**
      * 根据传入条件模糊查询
      *
-     * @param orderId   订单ID
+     * @param orderId     订单ID
      * @param productName 产品名称
-     * @param orderStatus 订单状态
-     * @param page       开始页面
+     * @param page        开始页面
      * @param limit       每页条数
      * @return 封装结果
      */
@@ -105,13 +120,12 @@ public class OrderController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderId", value = "订单id", dataType = "Integer"),
             @ApiImplicitParam(name = "productName", value = "产品名称", dataType = "String"),
-            @ApiImplicitParam(name = "Integer", value = "订单状态", dataType = "Intger"),
             @ApiImplicitParam(name = "page", value = "页数", dataType = "Integer"),
             @ApiImplicitParam(name = "limit", value = "每页页数", dataType = "Integer")}
     )
-    @RecordOperation(name = "根据传入条件查询订单信息",url = "/order/search")
-    public Result serachOrder(Integer orderId, String publisher, Integer Integer, Integer page, Integer limit) {
-        Result result = orderService.search(orderId, publisher, Integer, page, limit);
+    @RecordOperation(name = "根据传入条件查询订单信息", url = "/order/search")
+    public Result serachOrder(Integer orderId, String productName, Integer page, Integer limit) {
+        Result result = orderService.search(orderId, productName, page, limit);
         logger.info("订单条件搜索查询成功");
         return result;
     }
@@ -119,13 +133,14 @@ public class OrderController {
 
     /**
      * 添加订单
-     * @param Order 订单实体类
+     *
+     * @param order 订单实体类
      * @return 结果
      */
     @PostMapping("/addOrder")
     @ResponseBody
     @ApiOperation(value = "添加订单")
-    @RecordOperation(name = "添加订单",url = "/order/addOrder")
+    @RecordOperation(name = "添加订单", url = "/order/addOrder")
     public Result addOrder(@ApiParam(name = "order", value = "订单实体类") Order order) {
         Result result = orderService.addOrder(order);
         logger.info("成功添加订单");
@@ -142,10 +157,30 @@ public class OrderController {
     @PostMapping("/findOrderById")
     @ResponseBody
     @ApiOperation(value = "根据Id查询订单")
-    @RecordOperation(name = "根据Id查询订单信息",url = "/order/findOrderById")
+    @RecordOperation(name = "根据Id查询订单信息", url = "/order/findOrderById")
     public Result findOrderById(@ApiParam(name = "id", value = "订单Id") Integer id) {
         Result result = orderService.findOrderById(id);
         logger.info("根据订单ID查询成功");
+        return result;
+    }
+
+    /**
+     * 根据用户Id查询订单信息
+     *
+     * @param session 登录后session
+     * @return 结果
+     */
+    @GetMapping("/findOrderByUserId")
+    @ResponseBody
+    @ApiOperation(value = "根据用户Id查询订单")
+    @RecordOperation(name = "根据Id查询订单信息", url = "/order/findOrderByUserId")
+    public Result findOrderByUserId(HttpSession session,Integer page, Integer limit) {
+        Result result = new Result();
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId != null) {
+            result = orderService.findOrderByUserId(userId,page,limit);
+            logger.info("根据用户ID查询成功"+userId);
+        }
         return result;
     }
 
@@ -158,7 +193,7 @@ public class OrderController {
     @PostMapping("/deleteById")
     @ResponseBody
     @ApiOperation(value = "删除订单")
-    @RecordOperation(name="删除订单",url = "/order/deleteById")
+    @RecordOperation(name = "删除订单", url = "/order/deleteById")
     public Result deleteById(@ApiParam(name = "id", value = "订单Id") Integer id) {
         Result result = orderService.deleteById(id);
         logger.info("成功删除订单");
@@ -174,7 +209,7 @@ public class OrderController {
     @PostMapping("/batchDelete")
     @ResponseBody
     @ApiOperation(value = "批量删除订单")
-    @RecordOperation(name = "批量删除订单",url = "/order/batchDelete")
+    @RecordOperation(name = "批量删除订单", url = "/order/batchDelete")
     public Result batchDeleteByOrderId(@ApiParam(name = "ids", value = "订单名数组") String[] ids) {
         System.out.println(ids);
         Result result = orderService.batchDeleteByOrderId(ids);
@@ -188,16 +223,26 @@ public class OrderController {
     /**
      * 更新订单信息
      *
-     * @param Order 订单信息
+     * @param order 订单信息
      * @return 封装结果
      */
     @PostMapping("/updateOrder")
     @ResponseBody
     @ApiOperation(value = "更新订单信息")
-    @RecordOperation(name = "更新订单信息",url = "/order/updateOrder")
+    @RecordOperation(name = "更新订单信息", url = "/order/updateOrder")
     public Result updateOrder(@ApiParam(name = "order", value = "订单实体类") Order order) {
         Result result = orderService.updateOrder(order);
         logger.info("更新订单成功" + result);
+        return result;
+    }
+
+
+    @ResponseBody
+    @PostMapping("/deliveryProduct")
+    public Result deliveryProduct(Integer id) {
+        logger.info(id);
+        Result result = orderService.deliveryProduct(id);
+        logger.info("发货成功" + result);
         return result;
     }
 }

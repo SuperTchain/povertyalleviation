@@ -1,4 +1,7 @@
 function showTime(tmpDate){
+    if(tmpDate==null){
+        return "未发货"
+    }
     //将毫秒数转换为对应的日期或者时间
     var d = new Date(tmpDate);
     var year = d.getFullYear();

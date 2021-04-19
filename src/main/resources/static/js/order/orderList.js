@@ -196,7 +196,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
         //这里以搜索为例
         orderTable.reload({
             where: { //设定异步数据接口的额外参数
-                productId: $("#orderId").val(),
+                orderId: $("#orderId").val(),
                 productName: $("#productName").val(),
                 // timerange: $("#timerange").val()
                 // productKind:$("#productKind").val()
