@@ -9,4 +9,14 @@
     <select id="findPartOfSale" resultType="decimal">
         select sum(orderPrice) from `order` where orderCreateTime between #{days1} and #{days2} and orderStatus=1
     </select>
+
+    <select id="analysisProduct" resultType="string">
+        select productName, count(*) from `order`
+        <where>
+            <if test="startTime!=null and endTime!=null">
+                and orderCreateTime between #{startTime} and #{endTime} and orderStatus=1
+            </if>
+        </where>
+        group by productName order by count(*) desc limit 0,1
+    </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.lx.povertyalleviation.service;
 
 
+import com.lx.povertyalleviation.utils.Result;
+
 import java.math.BigDecimal;
 
 public interface AnalysisService {
@@ -17,4 +19,6 @@ public interface AnalysisService {
      * @return 销售额
      */
     BigDecimal findPartOfSale(String days1,String days2);
+
+    Result analysisProduct(String timerange);
 }

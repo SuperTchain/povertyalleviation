@@ -104,4 +104,16 @@ public class AnalysisController {
         result.setMessage("成功获取到图表数据！");
         return result;
     }
+
+    /**
+     * 根据时间分析产品信息
+     * @param timerange 时间
+     * @return 产品
+     */
+    @PostMapping("/analysisProduct")
+    @ResponseBody
+    public  Result analysisProduct(String timerange){
+        analysisService.analysisProduct(timerange);
+        return result;
+    }
 }

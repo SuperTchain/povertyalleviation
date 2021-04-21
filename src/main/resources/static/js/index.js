@@ -5,7 +5,7 @@ layui.use(['element', 'carousel', 'layer', 'element', 'form', 'laypage'], functi
     var element = layui.element;
     var layer = layui.layer;
     var form = layui.form;
-    var $ = layui.jquery;
+    $ = layui.jquery;
     var laypage = layui.laypage;
 
 

@@ -1,7 +1,11 @@
-layui.use(['layer', 'form'], function(){
-    $ = layui.jquery;
-    var layer = layui.layer
-        ,form = layui.form ;
+layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function(){
+    var laypage = layui.laypage //分页
+        , layer = layui.layer //弹层
+        , table = layui.table //表格
+        , $ = layui.$//jquery模块
+        , e = layui.element //元素操作
+        , form = layui.form //表单模块
+        , laydate = layui.laydate //日期
     // 初始化 销售额
     var saleChart = echarts.init(document.getElementById('div_sale_chart'));
     // 销售额--显示标题，图例和空的坐标轴
@@ -91,4 +95,34 @@ layui.use(['layer', 'form'], function(){
             layer.alert("error");
         }
     });
+
+
+    //时间的实例化
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#timerange', //指定元素
+        range: "~",//定义分割字符
+        type: "datetime" //date:日期   datetime:日期和时间
+    });
+
+
+    //根据条件进行搜索
+    $("#search").click(function () {
+        //为了搜索之后便于重新渲染表格数据，我们使用重载
+        $.ajax({
+            url: "/analysis/analysisProduct",
+            type: "post",
+            data: {
+                timerange: $("#timerange").val()
+            },
+            success: function (res) {
+                if (res.status == 200) {
+                    //index：layui便于记录弹框的索引
+                    layer.alert("下月热销产品可能是:"+res.item, function (index) {
+                        layer.close(index);//关闭弹框
+                    })
+                }
+            }
+        })
+    })
 });

@@ -12,4 +12,6 @@ public interface AnalysisDao {
     BigDecimal findAllSaleOfMonth();
 
     BigDecimal findPartOfSale(@Param("days1") String days1,@Param("days2") String days2);
+
+    String analysisProduct(@Param("startTime") String startTime, @Param("endTime") String endTime);
 }

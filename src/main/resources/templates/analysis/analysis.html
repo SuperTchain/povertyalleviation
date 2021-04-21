@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <body>
+<div style="margin-top: 20px;margin-left: 20px;">
+    <!--多条件查询的搜索-->
+    请选择时间进行下月产品预测:
+    <div class="layui-inline">
+        <!--autocomplete="off":禁止浏览器自动填充内容-->
+        <input id="timerange" name="timerange" placeholder="请选择具体时间"  autocomplete="off" class="layui-input">
+    </div>
+    <button id="search" type="button" class="layui-btn">
+        <i class="layui-icon layui-icon-search"></i> 预测
+    </button>
+</div>
 <!-- 月内各周_销售额 -->
 <div class="layui-card">
     <div class="layui-card-body">
@@ -19,8 +30,10 @@
     </div>
 </div>
 
+
 <script type="text/javascript" src="/static/layui/layui.js"></script>
 <script type="text/javascript" src="/static/js/echarts.js"></script>
 <script type="text/javascript" src="/static/js/analysis/analysis.js"></script>
+<script type="text/javascript" src="/static/js/date.js"></script>
 </body>
 </html>

@@ -33,8 +33,8 @@ layui.use(['element','carousel','layer', 'element', 'form','laypage'], function 
                 str += "<div style='margin:auto; margin-bottom:130px;  width:750px; height:200px; float:left; text-align:center' class='layui-col-md6'><div><a href='"+'/product/toViewProduct?id='+""+o.id+"' target='main'><img alt='' src='"+'/static/img/products/'+""+o.productImgName+"' width='250px' height='250px' style='border: #f8f9fa;border-radius：30px;'/></a></div>";
                 str += "<div style='text-align:center'><div><label>商品名称:</label><span>"+o.productName+"</span></div>";
                 str += "<div><label>价格:</label><span style='color:#FF3030;'>￥"+o.productPrice+"</span></div>";
-                str += "<div><label>商品描述:</label><span>"+o.productDesc+"</span></div>";
-                str += "<div><label>库存:</label><span style='color:#CDC9C9;'>"+o.productNumber+"</span></div>";
+                // str += "<div><label>商品描述:</label><span>"+o.productDesc+"</span></div>";
+                // str += "<div><label>库存:</label><span style='color:#CDC9C9;'>"+o.productNumber+"</span></div>";
                 str += "<div style='display:none;'><label>商品ID:</label><span>"+o.id+"</span></div></div></div>";
             });
             $("#product").html(str);
