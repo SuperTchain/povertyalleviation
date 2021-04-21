@@ -121,4 +121,18 @@
     <select id="findAllShoppingCar" resultMap="BaseResultMap">
         select * from product
     </select>
+    <!--根据id查询所有产品信息-->
+    <select id="findProductListById" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include> from product where
+        productName in (select productName from user_product where  userId=#{param1})
+        limit #{param2},#{param3}
+    </select>
+    <!--根据id查询产品条数-->
+    <select id="selectCountById" resultType="java.lang.Integer">
+        select count(*) from user_product where userId=#{userId}
+    </select>
+    <!--    添加映射信息-->
+    <insert id="addRealationship" >
+        insert into user_product(productName,userId) values(#{productName},#{userId})
+    </insert>
 </mapper>

@@ -25,11 +25,11 @@ public interface ProductService {
     Result search(Integer productId, String productName,String productKind, Integer page, Integer limit);
 
     /**
-     * 添加产品
+     * 商家添加产品
      * @param product 产品实体类
      * @return 结果
      */
-    Result addProduct(Product product);
+    Result addProduct(Product product,Integer userId);
 
     /**
      * 根据产品ID查询信息
@@ -59,9 +59,6 @@ public interface ProductService {
      */
     Result updateProduct(Product product);
 
-
-
-
     /**
      * 根据产品种类查找产品
      * @param productKind 类别
@@ -69,4 +66,6 @@ public interface ProductService {
      * @return 结果
      */
     Result findProductByCondition(String productKind,Integer hotSaleStatus,Integer page, Integer limit);
+
+    Result findProductListById(Integer userId, Integer page, Integer limit);
 }

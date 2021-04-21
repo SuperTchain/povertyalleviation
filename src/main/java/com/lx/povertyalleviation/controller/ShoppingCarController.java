@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -77,8 +78,8 @@ public class ShoppingCarController {
         order.setAddress(shoppingCar.getProductionAddress());
         order.setId(shoppingCar.getId());
         order.setProductName(shoppingCar.getProductName());
-        order.setOrderPrice(shoppingCar.getProductPrice());
-        order.setNumber(shoppingCar.getProductNumber());
+        order.setOrderPrice(shoppingCar.getProductPrice().multiply(BigDecimal.valueOf(shoppingCar.getBuyCount())));
+        order.setNumber(shoppingCar.getBuyCount());
         order.setUserId(shoppingCar.getUserId());
         order.setOrderCreateTime(DateUtil.getNowDate());
         order.setOrderStatus(0);

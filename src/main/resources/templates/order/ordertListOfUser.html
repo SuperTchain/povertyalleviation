@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>商家订单管理界面</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+<body>
+<div style="margin-top: 20px;margin-left: 20px;">
+    <!--多条件查询的搜索-->
+    订单搜索:
+    <div class="layui-inline">
+        <!--autocomplete="off":禁止浏览器自动填充内容-->
+        <input id="orderId" name="orderId" placeholder="订单id" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-inline">
+        <!--autocomplete="off":禁止浏览器自动填充内容-->
+        <input id="productName" name="productName" placeholder="产品名称" autocomplete="off" class="layui-input">
+    </div>
+    <!--    <div class="layui-inline">-->
+    <!--        &lt;!&ndash;autocomplete="off":禁止浏览器自动填充内容&ndash;&gt;-->
+    <!--        <input id="productKind" name="productKind" placeholder="产品类别"  autocomplete="off" class="layui-input">-->
+    <!--    </div>-->
+    <button id="search" type="button" class="layui-btn">
+        <i class="layui-icon layui-icon-search"></i> 搜索
+    </button>
+</div>
+
+<!--主体表格-->
+<table class="layui-hide" id="orderList" lay-filter="orderTable"></table>
+
+
+<script type="text/html" id="barDemo">
+    <!--    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="receiveProduct">收货</a>
+<!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+</script>
+<script type="text/html" id="head-option">
+    <!--    <a class="layui-btn" lay-event="add">添加产品</a>-->
+<!--    <a class="layui-btn layui-btn-danger" lay-event="delete">删除</a>-->
+</script>
+<script type="text/html" id="transfor_orderStatus">
+    {{#if (d.orderStatus == 1) { }}
+    <span>已完成</span>
+    {{# }else if(d.orderStatus == 0){ }}
+    <span>未完成</span>
+    {{# } }}
+</script>
+<script type="text/html" id="transfor_payStatus">
+    {{#if (d.payStatus == 1) { }}
+    <span>已支付</span>
+    {{# }else if(d.payStatus == 0){ }}
+    <span>未支付</span>
+    {{# } }}
+</script>
+<script type="text/html" id="transfor_deliveryStatus">
+    {{#if (d.delivery == 1) { }}
+    <span>已发货</span>
+    {{# }else if(d.delivery == 0){ }}
+    <span>未发货</span>
+    {{# } }}
+</script>
+</body>
+<script type="text/javascript" src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/order/orderListOfUser.js"></script>
+<script type="text/javascript" src="/static/js/date.js"></script>
+</html>

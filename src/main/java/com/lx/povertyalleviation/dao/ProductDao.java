@@ -109,6 +109,21 @@ public interface ProductDao {
      */
     Integer updateProduct(Product product);
 
-
+    /**
+     * 查询所有购物车商品信息
+     * @return 结果
+     */
     List<ShoppingCar> findAllShoppingCar();
+
+    /**
+     * 添加商品与商家关系映射
+     * @param productName 产品名称
+     * @param userId 商家信息
+     * @return 结果
+     */
+    Integer addRealationship(@Param("productName") String productName, @Param("userId") Integer userId);
+
+    List<Product> findProductListById(Integer userId, Integer start, Integer limit);
+
+    Integer selectCountById(Integer userId);
 }

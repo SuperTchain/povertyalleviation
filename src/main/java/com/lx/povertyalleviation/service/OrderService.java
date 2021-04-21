@@ -1,9 +1,11 @@
 package com.lx.povertyalleviation.service;
 
 import com.lx.povertyalleviation.pojo.Order;
+import com.lx.povertyalleviation.utils.DateUtil;
 import com.lx.povertyalleviation.utils.Result;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OrderService {
@@ -71,5 +73,26 @@ public interface OrderService {
      */
     Result findOrderByUserId(Integer id,Integer page,Integer limit);
 
-    Result deliveryProduct(Integer orderId);
+    /**
+     * 商家发货
+     * @param orderId 订单id
+     * @return 结果
+     */
+    Result deliveryProduct(Integer orderId, Date nowDate);
+
+    /**
+     * 买家收货
+     * @param id 订单id
+     * @return 结果
+     */
+    Result receiveProduct(Integer id,Date nowDate);
+
+    /**
+     * 根据商家Id查询所有订单信息
+     * @param userId 商家Id
+     * @param page 页数
+     * @param limit 条数
+     * @return 结果
+     */
+    Result findOrderBySalesId(Integer userId, Integer page, Integer limit);
 }

@@ -2,6 +2,7 @@ package com.lx.povertyalleviation.controller;
 
 import cn.dsna.util.images.ValidateCode;
 import com.lx.povertyalleviation.annotations.RecordOperation;
+import com.lx.povertyalleviation.dao.UserDao;
 import com.lx.povertyalleviation.pojo.User;
 import com.lx.povertyalleviation.service.UserService;
 import com.lx.povertyalleviation.utils.DateUtil;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,8 +40,11 @@ public class LoginController {
     /**
      * 引入service
      */
-    @Autowired
+    @Resource
     private UserService userService;
+
+    @Resource
+    private UserDao userDao;
 
     /**
      * 开启日志
@@ -257,7 +262,8 @@ public class LoginController {
         //设置标题
         message.setSubject("测试验证码邮箱");
         message.setFrom("486195050@qq.com");
-        message.setTo("2401700911@qq.com");
+        User userByName = userDao.findUserByName(account);
+        message.setTo(userByName.getEmail());
 
         message.setText("您的验证码是:" + str);
         System.out.println(str);

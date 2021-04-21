@@ -89,12 +89,27 @@
     <update id="updateOrder" parameterType="com.lx.povertyalleviation.pojo.Order">
         update `order` set orderStatus=#{orderStatus},payStatus=#{payStatus},orderEndTime=#{orderEndTime},delivery=#{delivery} where id=#{id}
     </update>
-    <!--更新订单状态-->
-    <update id="deliveryProduct" parameterType="java.lang.Integer">
-        update `order` set delivery=1 where id=#{id}
+    <!--订单发货-->
+    <update id="deliveryProduct" >
+        update `order` set delivery=1,orderDeliveryTime=#{param2} where id=#{param1}
     </update>
     <!--根据用户Id查询订单数量-->
     <select id="selectCountByUserId" resultType="java.lang.Integer">
         select count(*) from `order` where userId=#{id}
+    </select>
+    <!--用户收货-->
+    <update id="receiveProduct" >
+        update `order` set orderStatus=1,orderEndTime=#{date} where id=#{id}
+    </update>
+    <!--根据id查询所有订单信息-->
+    <select id="findOrderBySalesId" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List"></include> from `order` where
+        productName in (select productName from user_product where  userId=#{param1})
+        limit #{param2},#{param3}
+    </select>
+    <!--根据id查询订单条数-->
+    <select id="selectCountBySalesId" resultType="java.lang.Integer">
+        select count(*) from `order` where
+            productName in (select productName from user_product where  userId=#{userId})
     </select>
 </mapper>

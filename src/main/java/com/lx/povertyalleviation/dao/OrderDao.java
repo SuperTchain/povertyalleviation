@@ -5,6 +5,7 @@ import com.lx.povertyalleviation.pojo.Product;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +34,6 @@ public interface OrderDao {
      *
      * @param orderId   订单ID
      * @param productName 产品名称
-     * @param orderStatus 订单状态
      * @param start       开始页面
      * @param limit       每页条数
      * @return 封装结果
@@ -45,7 +45,6 @@ public interface OrderDao {
      *
      * @param orderId   订单ID
      * @param productName 产品名称
-     * @param orderStatus 订单状态
      * @return 数量
      */
     Integer searchCountLike(@Param("orderId") Integer orderId, @Param("productName") String productName);
@@ -92,7 +91,28 @@ public interface OrderDao {
      */
     List<Order> findOrderByUserId(@Param("id") Integer id,@Param("start") Integer start, @Param("limit") Integer limit);
 
-    Integer deliveryProduct(Integer orderId);
+    /**
+     * 发货
+     * @param orderId 订单id
+     * @return 结果
+     */
+    Integer deliveryProduct(Integer orderId,Date nowDate);
 
+    /**
+     * 根据用户id查询订单数量
+     * @param id 用户id
+     * @return 结果
+     */
     Integer selectCountByUserId(Integer id);
+
+    /**
+     * 收货
+     * @param id 订单id
+     * @return 结果
+     */
+    Integer receiveProduct(@Param("id") Integer id,@Param("date") Date date);
+
+    List<Product> findOrderBySalesId(Integer userId, Integer start, Integer limit);
+
+    Integer selectCountBySalesId(Integer userId);
 }

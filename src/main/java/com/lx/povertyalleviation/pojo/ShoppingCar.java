@@ -66,8 +66,8 @@ public class ShoppingCar {
     @TableField("buyCount")
     private Integer buyCount;
 
-    @ApiModelProperty(value = "购买数量",example = "1")
-    @TableField("buyCount")
+    @ApiModelProperty(value = "用户iD",example = "1")
+    @TableField("userId")
     private Integer userId;
 
     @Override

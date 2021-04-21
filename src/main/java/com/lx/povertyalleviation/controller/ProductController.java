@@ -42,7 +42,7 @@ public class ProductController {
     private ProductService productService;
 
     /**
-     * 跳转到产品列表界面
+     * 管理员跳转到产品列表界面
      *
      * @return 列表界面
      */
@@ -52,13 +52,37 @@ public class ProductController {
         return "product/productList";
     }
 
+
     /**
-     * 跳转到添加产品列表界面
+     * 商家跳转到产品列表界面
+     *
+     * @return 列表界面
+     */
+    @GetMapping("/toProductListOfSales")
+    @ApiOperation(value = "跳转到产品列表界面")
+    public String toProductListOfSales() {
+        return "product/productListOfSales";
+    }
+
+
+    /**
+     * 管理员跳转到添加产品列表界面
+     *
+     * @return 列表界面
+     */
+    @GetMapping("/toAddProductByAdmin")
+    @ApiOperation(value = "管理员跳转到添加产品界面")
+    public String toAddProductByAdmin() {
+        return "product/addProductByAdmin";
+    }
+
+    /**
+     * 商家跳转到添加产品列表界面
      *
      * @return 列表界面
      */
     @GetMapping("/toAddProduct")
-    @ApiOperation(value = "跳转到添加产品界面")
+    @ApiOperation(value = "商家跳转到添加产品界面")
     public String toAddProduct() {
         return "product/addProduct";
     }
@@ -146,7 +170,7 @@ public class ProductController {
      *
      * @param productId   产品ID
      * @param productName 产品名称
-     * @param timerange   时间范围
+     * @param productKind   产品类别
      * @param page        页数
      * @param limit       每页条数
      * @return 封装结果
@@ -170,16 +194,35 @@ public class ProductController {
 
 
     /**
-     * 添加产品
+     * 商家添加产品
      * @param product 产品实体类
      * @return 结果
      */
     @PostMapping("/addProduct")
     @ResponseBody
-    @ApiOperation(value = "添加产品")
-    @RecordOperation(name = "添加产品",url = "/product/addProduct")
-    public Result addProduct(@ApiParam(name = "product", value = "产品实体类") Product product) {
-        Result result = productService.addProduct(product);
+    @ApiOperation(value = "商家添加产品")
+    @RecordOperation(name = "商家添加产品",url = "/product/addProduct")
+    public Result addProduct(@ApiParam(name = "product", value = "产品实体类") Product product,HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        Result result = productService.addProduct(product,userId);
+        logger.info("成功添加产品");
+        result.setStatus(200);
+        return result;
+    }
+
+
+    /**
+     * 管理员添加产品
+     * @param product 产品实体类
+     * @return 结果
+     */
+    @PostMapping("/addProductByAdmin")
+    @ResponseBody
+    @ApiOperation(value = "管理员添加产品")
+    @RecordOperation(name = "管理员添加产品",url = "/product/addProduct")
+    public Result addProductByAdmin(@ApiParam(name = "product", value = "产品实体类") Product product,HttpServletRequest request) {
+        Integer userId = Integer.valueOf(request.getParameter("userId"));
+        Result result = productService.addProduct(product,userId);
         logger.info("成功添加产品");
         result.setStatus(200);
         return result;
@@ -198,6 +241,27 @@ public class ProductController {
     public Result findProductById(@ApiParam(name = "id", value = "产品Id") Integer id) {
         Result result = productService.findProductById(id);
         logger.info("根据产品ID查询成功");
+        return result;
+    }
+
+    /**
+     * 根据id查询所有产品信息
+     *
+     * @param page  页数
+     * @param limit 每页条数
+     * @return 封装结果
+     */
+    @GetMapping("/findProductListById")
+    @ResponseBody
+    @ApiOperation(value = "根据id查询所有产品信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页数"),
+            @ApiImplicitParam(name = "limit", value = "每页页数")
+    })
+    @RecordOperation(name = "查询所有产品信息",url = "/product/findProductListById")
+    public Result findProductListById(HttpSession session,Integer page, Integer limit) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        Result result = productService.findProductListById(userId,page, limit);
         return result;
     }
 

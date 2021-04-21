@@ -72,10 +72,10 @@ public class ProductServiceImpl implements ProductService {
         //计算查询的起始位置
         Integer start = (page - 1) * limit;
         //分页查询所有产品集合
-        List<Product> products = productDao.search(productId, productName,productKind, start, limit);
+        List<Product> products = productDao.search(productId, productName, productKind, start, limit);
         result.setItem(products);
         //查询产品的总个数
-        Integer count = productDao.searchCountLike(productId, productName,productKind);
+        Integer count = productDao.searchCountLike(productId, productName, productKind);
         result.setTotal(count);
         return result;
     }
@@ -87,12 +87,16 @@ public class ProductServiceImpl implements ProductService {
      * @return 结果
      */
     @Override
-    public Result addProduct(Product product) {
+    @Transactional(rollbackFor = Exception.class)
+    public Result addProduct(Product product, Integer userId) {
         Result result = new Result();
         try {
-            productDao.addProduct(product);
-            result.setStatus(200);
-            result.setItem("添加成功");
+            Integer result1 = productDao.addProduct(product);
+            Integer result2 = productDao.addRealationship(product.getProductName(), userId);
+            if (result1 > 0 && result2 > 0) {
+                result.setStatus(200);
+                result.setItem("添加成功");
+            }
         } catch (Exception e) {
             logger.error("错误", e);
             result.setStatus(500);
@@ -180,20 +184,44 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 根据条件查找产品
-     * @param productKind 类别
+     *
+     * @param productKind   类别
      * @param hotSaleStatus 热销状态
      * @return 结果
      */
     @Override
-    public Result findProductByCondition(String productKind,Integer hotSaleStatus, Integer page, Integer limit){
+    public Result findProductByCondition(String productKind, Integer hotSaleStatus, Integer page, Integer limit) {
         //计算查询的起始位置
         Integer start = (page - 1) * limit;
         Result result = new Result();
-        List<Product> products = productDao.findAllProductByCondition(productKind, hotSaleStatus,start, limit);
-        Integer count = productDao.selectCountByCondition(productKind,hotSaleStatus);
+        List<Product> products = productDao.findAllProductByCondition(productKind, hotSaleStatus, start, limit);
+        Integer count = productDao.selectCountByCondition(productKind, hotSaleStatus);
         result.setItem(products);
         result.setTotal(count);
-        logger.info("根据条件查询产品成功"+products);
+        logger.info("根据条件查询产品成功" + products);
+        return result;
+    }
+
+
+
+    /**
+     * 根据Id查询所有产品信息
+     *
+     * @param page  页数
+     * @param limit 每页条数
+     * @return 封装结果
+     */
+    @Override
+    public Result findProductListById(Integer userId,Integer page, Integer limit) {
+        //计算查询的起始位置
+        Integer start = (page - 1) * limit;
+        Result result = new Result();
+        //分页查询所有产品集合
+        List<Product> products = productDao.findProductListById(userId,start, limit);
+        result.setItem(products);
+        //查询产品的总个数
+        Integer count = productDao.selectCountById(userId);
+        result.setTotal(count);
         return result;
     }
 

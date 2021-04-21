@@ -1,14 +1,18 @@
 package com.lx.povertyalleviation.controller;
 
+import com.lx.povertyalleviation.service.AnalysisService;
+import com.lx.povertyalleviation.utils.DateUtil;
 import com.lx.povertyalleviation.utils.Result;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,9 +25,13 @@ public class AnalysisController {
      * 引入日志
      */
     private static Logger logger = Logger.getLogger(AnalysisController.class);
+    private int lastweekday;
 
-    @Autowired
+    @Resource
     private Result result;
+
+    @Resource
+    private AnalysisService analysisService;
 
     @GetMapping("/toAnalysis")
     public String  toAnalysis(){
@@ -50,13 +58,20 @@ public class AnalysisController {
         sale_weekList.add("第1周");
         sale_weekList.add("第2周");
         sale_weekList.add("第3周");
-        sale_weekList.add("第4周");
         // 设置 每周销售金额
         List<String> sale_feeList = new ArrayList<String>();
-        sale_feeList.add("1000");
-        sale_feeList.add("700");
-        sale_feeList.add("800");
-        sale_feeList.add("1200");
+
+        String days1 = DateUtil.localDateTimeToString(DateUtil.getFirstDay());
+        String days2 = DateUtil.localDateTimeToString(DateUtil.getPlusLocalDate(DateUtil.getFirstDay(),9L));
+        String days3=DateUtil.localDateTimeToString(DateUtil.getPlusLocalDate(DateUtil.getFirstDay(),19L));
+
+        BigDecimal preSaleOfMonth = analysisService.findPartOfSale(days1,days2);
+        BigDecimal middleSaleOfMonth = analysisService.findPartOfSale(days2,days3);
+        BigDecimal lastSaleOfMonth = analysisService.findPartOfSale(days3,DateUtil.localDateTimeToString(DateUtil.getLastDay()));
+
+        sale_feeList.add(String.valueOf(preSaleOfMonth));
+        sale_feeList.add(String.valueOf(middleSaleOfMonth));
+        sale_feeList.add(String.valueOf(lastSaleOfMonth));
         // 封装 销售数据
         Map<String, Object> sale_data = new LinkedHashMap<String, Object>();
         sale_data.put("week", sale_weekList);
@@ -66,11 +81,14 @@ public class AnalysisController {
          * 饼状图---销售总额 对比 广告总费用
          */
         Map<String, Object> saleTotalFee = new LinkedHashMap<String, Object>();
+        BigDecimal allSaleOfMonth = analysisService.findAllSaleOfMonth();
         saleTotalFee.put("name", "销售总额");
-        saleTotalFee.put("value", "3700");
+        saleTotalFee.put("value", allSaleOfMonth);
+
         Map<String, Object> adTotalFee = new LinkedHashMap<String, Object>();
-        adTotalFee.put("name", "宣传费用");
-        adTotalFee.put("value", "500");
+        BigDecimal partOfSale = analysisService.findPartOfSale(days1, DateUtil.localDateTimeToString(DateUtil.getLastDay()));
+        adTotalFee.put("name", "本月销售额");
+        adTotalFee.put("value", partOfSale);
         // 封装 总额数据
         List<Map<String, Object>> feeList = new ArrayList<Map<String,Object>>();
         feeList.add(saleTotalFee);

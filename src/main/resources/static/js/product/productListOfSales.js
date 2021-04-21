@@ -11,7 +11,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
     var product_table = table.render({
         elem: '#productList'//表格的id
         , height: 600//表格的高度
-        , url: '/product/findAllProduct'//获取视频列表的后台接口(异步的)
+        , url: '/product/findProductListById'//获取视频列表的后台接口(异步的)
         // 借助parseData 回调函数将其解析成 table 组件所规定的数据格式
         , parseData: function (res) { //res 后端返回给前端的数据(响应)
             return {
@@ -75,7 +75,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function 
                 layer.open({
                     //0（信息框，默认）1（页面层）2（iframe层)
                     type: 2,
-                    content: "/product/toAddProductByAdmin",
+                    content: "/product/toAddProduct",
                     area: ["70%", "70%"],//控制宽高
                     shadeClose: true,//点击外部窗口关闭
                     shade: 0.8//弹层外区域透明度取值

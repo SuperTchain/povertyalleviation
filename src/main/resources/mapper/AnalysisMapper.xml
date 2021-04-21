@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lx.povertyalleviation.dao.AnalysisDao">
+
+    <select id="findAllSaleOfMonth" resultType="decimal">
+        select sum(orderPrice) from `order` where orderStatus=1
+    </select>
+
+    <select id="findPartOfSale" resultType="decimal">
+        select sum(orderPrice) from `order` where orderCreateTime between #{days1} and #{days2} and orderStatus=1
+    </select>
+</mapper>

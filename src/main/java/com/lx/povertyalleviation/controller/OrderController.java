@@ -3,6 +3,7 @@ package com.lx.povertyalleviation.controller;
 import com.lx.povertyalleviation.annotations.RecordOperation;
 import com.lx.povertyalleviation.pojo.Order;
 import com.lx.povertyalleviation.service.OrderService;
+import com.lx.povertyalleviation.utils.DateUtil;
 import com.lx.povertyalleviation.utils.Result;
 import io.swagger.annotations.*;
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * @author lx
@@ -164,6 +166,28 @@ public class OrderController {
         return result;
     }
 
+
+    /**
+     * 根据商家id查询所有订单信息
+     *
+     * @param page  页数
+     * @param limit 每页条数
+     * @return 封装结果
+     */
+    @GetMapping("/findOrderBySalesId")
+    @ResponseBody
+    @ApiOperation(value = "根据id查询所有订单信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页数"),
+            @ApiImplicitParam(name = "limit", value = "每页页数")
+    })
+    @RecordOperation(name = "查询所有订单信息",url = "/product/findOrderBySalesId")
+    public Result findProductListById(HttpSession session,Integer page, Integer limit) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        Result result = orderService.findOrderBySalesId(userId,page, limit);
+        return result;
+    }
+
     /**
      * 根据用户Id查询订单信息
      *
@@ -237,12 +261,35 @@ public class OrderController {
     }
 
 
+    /**
+     * 商家发货
+     * @param id 订单id
+     * @return 结果
+     */
     @ResponseBody
     @PostMapping("/deliveryProduct")
     public Result deliveryProduct(Integer id) {
         logger.info(id);
-        Result result = orderService.deliveryProduct(id);
+        Date nowDate = DateUtil.getNowDate();
+        Result result = orderService.deliveryProduct(id,nowDate);
         logger.info("发货成功" + result);
+        return result;
+    }
+
+
+
+    /**
+     * 买家收货
+     * @param id 订单id
+     * @return 结果
+     */
+    @ResponseBody
+    @PostMapping("/receiveProduct")
+    public Result receiveProduct(Integer id) {
+        logger.info(id);
+        Date nowDate = DateUtil.getNowDate();
+        Result result = orderService.receiveProduct(id,nowDate);
+        logger.info("收获成功" + result);
         return result;
     }
 }

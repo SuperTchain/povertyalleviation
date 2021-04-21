@@ -3,7 +3,7 @@ package com.lx.povertyalleviation.service.impl;
 import com.lx.povertyalleviation.dao.OrderDao;
 import com.lx.povertyalleviation.dao.UserDao;
 import com.lx.povertyalleviation.pojo.Order;
-import com.lx.povertyalleviation.pojo.User;
+import com.lx.povertyalleviation.pojo.Product;
 import com.lx.povertyalleviation.service.OrderService;
 import com.lx.povertyalleviation.utils.DateUtil;
 import com.lx.povertyalleviation.utils.Result;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * 开启日志
      */
-    private static Logger logger= Logger.getLogger(OrderServiceImpl.class);
+    private static final Logger logger= Logger.getLogger(OrderServiceImpl.class);
     
     
     @Autowired
@@ -195,14 +196,56 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+    /**
+     * 发货
+     * @param orderId 订单id
+     * @return
+     */
     @Override
-    public Result deliveryProduct(Integer orderId) {
+    public Result deliveryProduct(Integer orderId,Date nowDate) {
         Result result = new Result();
-        Integer integer = orderDao.deliveryProduct(orderId);
+        Integer integer = orderDao.deliveryProduct(orderId,nowDate);
         if (integer!=null){
             result.setStatus(200);
             result.setItem("发货成功");
         }
+        return result;
+    }
+
+    /**
+     * 收货
+     * @param id 订单id
+     * @return
+     */
+    @Override
+    public Result receiveProduct(Integer id,Date nowDate) {
+        Result result = new Result();
+        Integer integer = orderDao.receiveProduct(id,nowDate);
+        if (integer!=null){
+            result.setStatus(200);
+            result.setItem("收获成功");
+        }
+        return result;
+    }
+
+    /**
+     * 根据id查询商家订单信息
+     * @param userId 商家Id
+     * @param page 页数
+     * @param limit 条数
+     * @return
+     */
+    @Override
+    public Result findOrderBySalesId(Integer userId, Integer page, Integer limit) {
+        //计算查询的起始位置
+        Integer start = (page - 1) * limit;
+        Result result = new Result();
+        //分页查询所有产品集合
+        List<Product> products = orderDao.findOrderBySalesId(userId,start, limit);
+        result.setItem(products);
+        //查询产品的总个数
+        Integer count = orderDao.selectCountBySalesId(userId);
+        result.setTotal(count);
         return result;
     }
 }

@@ -310,6 +310,7 @@ public class UserServiceImpl implements UserService {
             result.setStatus(404);
             result.setMessage("用户不存在");
         }
+        result.setItem(userByName);
         return result;
     }
 
