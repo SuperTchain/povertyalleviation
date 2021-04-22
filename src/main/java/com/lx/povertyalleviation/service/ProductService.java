@@ -68,4 +68,6 @@ public interface ProductService {
     Result findProductByCondition(String productKind,Integer hotSaleStatus,Integer page, Integer limit);
 
     Result findProductListById(Integer userId, Integer page, Integer limit);
+
+    Result findProductLikeName(String productName, Integer page, Integer limit);
 }

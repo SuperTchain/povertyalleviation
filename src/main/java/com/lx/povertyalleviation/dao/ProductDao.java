@@ -126,4 +126,8 @@ public interface ProductDao {
     List<Product> findProductListById(Integer userId, Integer start, Integer limit);
 
     Integer selectCountById(Integer userId);
+
+    List<Product> findProductLikeName(@Param("productName") String productName, @Param("start") Integer start, @Param("limit") Integer limit);
+
+    Integer selectCountLikeName(String productName);
 }

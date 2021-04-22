@@ -84,9 +84,5 @@ layui.use(['element','carousel','layer', 'element', 'form','laypage'], function 
 
 
 
-    window.viewProduct=function (){
-        alert("测试")
-    }
-
 
 });

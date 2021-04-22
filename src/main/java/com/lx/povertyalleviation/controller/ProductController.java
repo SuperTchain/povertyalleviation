@@ -381,4 +381,26 @@ public class ProductController {
             return result;
         }
     }
+
+
+    /**
+     * 根据产品名模糊查询所有产品信息
+     *
+     * @param page  页数
+     * @param limit 每页条数
+     * @return 封装结果
+     */
+    @GetMapping("/findProductLikeName")
+    @ResponseBody
+    @ApiOperation(value = "根据产品名模糊查询所有产品信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "productName",value = "产品名称"),
+            @ApiImplicitParam(name = "page", value = "页数"),
+            @ApiImplicitParam(name = "limit", value = "每页页数")
+    })
+    @RecordOperation(name = "根据产品名模糊查询所有产品信息",url = "/product/findProductLikeName")
+    public Result findProductLikeName(String productName,Integer page, Integer limit) {
+        Result result = productService.findProductLikeName(productName,page, limit);
+        return result;
+    }
 }

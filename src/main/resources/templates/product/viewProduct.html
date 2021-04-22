@@ -12,43 +12,44 @@
 </head>
 <body>
 
-<!--轮播图-->
-<div class="layui-carousel" id="test1">
-    <div carousel-item>
-        <div><img id="carousel" src="/static/img/products/pc1.png"></div>
-        <div><img id="carousel" src="/static/img/products/pc2.png"></div>
-        <div><img id="carousel" src="/static/img/products/pc3.png"></div>
-        <div><img id="carousel" src="/static/img/products/pc4.png"></div>
-        <div><img id="carousel" src="/static/img/products/pc5.png"></div>
-    </div>
-</div>
+<!--&lt;!&ndash;轮播图&ndash;&gt;-->
+<!--<div class="layui-carousel" id="test1">-->
+<!--    <div carousel-item>-->
+<!--        <div><img id="carousel" src="/static/img/products/pc1.png"></div>-->
+<!--        <div><img id="carousel" src="/static/img/products/pc2.png"></div>-->
+<!--        <div><img id="carousel" src="/static/img/products/pc3.png"></div>-->
+<!--        <div><img id="carousel" src="/static/img/products/pc4.png"></div>-->
+<!--        <div><img id="carousel" src="/static/img/products/pc5.png"></div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div id="checkFormId">
 
     <form class="layui-form" action="/shoppingcar/addToShoppingCar"  method="post" id="form1" lay-filter="checkForm" >
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="display: none">
             <label class="layui-form-label">产品ID</label>
-            <div class="layui-input-block">
+            <div class="layui-input-block" >
                 <input type="text" name="id" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
                        class="layui-input">
             </div>
         </div>
+        <img src="" id="productImgName">
         <div class="layui-form-item">
-            <label class="layui-form-label">产品名称</label>
+            <label class="layui-form-label">产品名称:</label>
             <div class="layui-input-block">
                 <input type="text" name="productName" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">产品价格</label>
+            <label class="layui-form-label">产品价格:</label>
             <div class="layui-input-block">
                 <input type="text" name="productPrice" lay-verify="price" lay-reqtext="不能为空哦" autocomplete="off" readonly="readonly"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">生产地址</label>
+            <label class="layui-form-label">生产地址:</label>
             <div class="layui-input-block">
                 <input type="text" name="productionAddress" lay-verify="required" autocomplete="off" readonly="readonly"
                        class="layui-input">
@@ -62,7 +63,7 @@
 <!--            </div>-->
 <!--        </div>-->
         <div class="layui-form-item">
-            <label class="layui-form-label">产品数量</label>
+            <label class="layui-form-label">余量:</label>
             <div class="layui-input-block">
                 <input type="text" name="productNumber" lay-verify="number" autocomplete="off" readonly="readonly"
                        class="layui-input">
@@ -70,22 +71,22 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">产品描述</label>
+            <label class="layui-form-label">产品特色:</label>
             <div class="layui-input-block">
                 <input type="text" name="productDesc" lay-verify="required" autocomplete="off" readonly="readonly"
                        class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="display: none">
             <label class="layui-form-label">产品状态</label>
             <div class="layui-input-block layui-input">
                 <input type="radio" name="productStatus" value="1" title="有货" checked="" disabled >
                 <input type="radio" name="productStatus" value="0" title="售罄" disabled>
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">数量</label>
-            <div class="layui-input-block">
+        <div class="layui-form-item" style="margin-left: 600px">
+            <label class="layui-form-label" >请输入数量:</label>
+            <div class="layui-input-block" >
                 <input type="text" name="buyCount" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -98,15 +99,15 @@
         </div>
     </form>
 </div>
-<button class="layui-icon layui-btn layui-btn-normal" id="window-comeback">&#xe65c;</button>
+<!--<button class="layui-icon layui-btn layui-btn-normal" id="window-comeback">&#xe65c;</button>-->
 <script src="/static/layui/layui.js" charset="utf-8"></script>
 <script src="/static/js/product/viewProduct.js"></script>
 <script src="/static/js/date.js"></script>
-<script>
-    var windowComeback = document.getElementById('window-comeback');
-    windowComeback.addEventListener('click', function () {
-        window.history.back(-1);
-    });
-</script>
+<!--<script>-->
+<!--    var windowComeback = document.getElementById('window-comeback');-->
+<!--    windowComeback.addEventListener('click', function () {-->
+<!--        // window.history.back(-1);-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>

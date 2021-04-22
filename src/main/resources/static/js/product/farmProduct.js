@@ -1,12 +1,40 @@
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
-layui.use(['element','carousel','layer', 'element', 'form','laypage'], function () {
+layui.use(['element', 'carousel', 'layer', 'element', 'form', 'laypage'], function () {
     var element = layui.element;
     var carousel = layui.carousel;
     var element = layui.element;
     var layer = layui.layer;
     var form = layui.form;
-    var $=layui.jquery;
+    $ = layui.jquery;
     var laypage = layui.laypage;
+
+
+    window.gotarget = function () {
+        document.getElementById('header').scrollIntoView();
+    }
+    let textContent = $("#TemplateOptions").textContent;
+
+//根据条件进行搜索
+//     $("#indexSearch").click(function () {
+//         $.ajax({
+//             url: "/findProductLikeCondition",
+//             type: "post",
+//             data: {
+//                 productName: textContent
+//             },
+//             success: function (res) {
+//                 if (res.status == 200) {
+//                     //index：layui便于记录弹框的索引
+//                     layer.alert(res.item, function (index) {
+//                         layer.close(index);//关闭弹框
+//                         //重载表格
+//                         user_table.reload();
+//                     })
+//                 }
+//             }
+//         })
+//         alert("测试")
+//     })
 
     //建造实例
     carousel.render({
@@ -30,12 +58,12 @@ layui.use(['element','carousel','layer', 'element', 'form','laypage'], function 
         var str = "";//用来存储html内容
         if(data.length > 0){
             $.each(data, function(v, o){
-                str += "<div style='margin:auto; margin-bottom:130px;  width:750px; height:200px; float:left; text-align:center' class='layui-col-md6'><div><a href='"+'/product/toViewProduct?id='+""+o.id+"' target='main'><img alt='' src='"+'/static/img/products/'+""+o.productImgName+"' width='250px' height='250px' style='border: #f8f9fa;border-radius：30px;'/></a></div>";
-                str += "<div style='text-align:center'><div><label>商品名称:</label><span>"+o.productName+"</span></div>";
-                str += "<div><label>价格:</label><span style='color:#FF3030;'>￥"+o.productPrice+"</span></div>";
-                str += "<div><label>商品描述:</label><span>"+o.productDesc+"</span></div>";
-                str += "<div><label>库存:</label><span style='color:#CDC9C9;'>"+o.productNumber+"</span></div>";
-                str += "<div style='display:none;'><label>商品ID:</label><span class='productId' >"+o.id+"</span></div></div></div>";
+                str += "<div style='margin:auto; margin-bottom:130px;  width:800px; height:200px; float:left; text-align:center' class='layui-col-md6'><div><a href='"+'/product/toViewProduct?id='+""+o.id+"' target='main'><img alt='' src='"+'/static/img/products/'+""+o.productImgName+"' width='250px' height='250px' style='border: #f8f9fa;border-radius：30px;'/></a></div>";
+                str += "<div style='text-align:center'><div><span>"+o.productName+"</span></div>";
+                str += "<div><span style='color:#FF3030;'>￥"+o.productPrice+"</span></div>";
+                // str += "<div><label>商品描述:</label><span>"+o.productDesc+"</span></div>";
+                // str += "<div><label>库存:</label><span style='color:#CDC9C9;'>"+o.productNumber+"</span></div>";
+                str += "<div style='display:none;'><label>商品ID:</label><span>"+o.id+"</span></div></div></div>";
             });
             $("#product").html(str);
         }
@@ -82,21 +110,6 @@ layui.use(['element','carousel','layer', 'element', 'form','laypage'], function 
         });
     }
 
-
-
-
-    // window.viewProduct=function (){
-    //     let val = $("#productId").val();
-    //     console.info(val)
-    //     $.ajax({
-    //         url: '/product/toViewProduct',
-    //         data: {"id":val},
-    //         dataType: 'json',
-    //         success: function(result){
-    //             console.info(result);
-    //         }
-    //     });
-    // }
 
 
 

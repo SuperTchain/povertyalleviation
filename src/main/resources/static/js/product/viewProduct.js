@@ -12,14 +12,14 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
     let productId = $("#productId").text();
     let isLogin = $("#isLogin").text();
 
-    //建造实例
-    carousel.render({
-        elem: '#test1'
-        , width: '100%' //设置容器宽度
-        , arrow: 'always' //始终显示箭头
-        , height: '500px'
-        //,anim: 'updown' //切换动画方式
-    });
+    // //建造实例
+    // carousel.render({
+    //     elem: '#test1'
+    //     , width: '100%' //设置容器宽度
+    //     , arrow: 'always' //始终显示箭头
+    //     , height: '500px'
+    //     //,anim: 'updown' //切换动画方式
+    // });
 
 
     $.ajax({
@@ -44,7 +44,6 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
                     , "productStatus": res.item.productStatus
                     , "productKind": res.item.productKind
                 });
-
                 // var d = res.item.productDate;
                 // console.log(d)
                 // //时间模板
@@ -61,6 +60,7 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
                 // } catch (e) {
                 //     $("#productDate").val(d);
                 // }
+                $("#productImgName").attr('src',"/static/img/products/"+res.item.productImgName);
             }
             form.render()
         }

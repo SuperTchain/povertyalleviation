@@ -225,5 +225,19 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
+    @Override
+    public Result findProductLikeName(String productName, Integer page, Integer limit) {
+        //计算查询的起始位置
+        Integer start = (page - 1) * limit;
+        Result result = new Result();
+        //分页查询所有产品集合
+        List<Product> products = productDao.findProductLikeName(productName,start, limit);
+        result.setItem(products);
+        //查询产品的总个数
+        Integer count = productDao.selectCountLikeName(productName);
+        result.setTotal(count);
+        return result;
+    }
+
 
 }

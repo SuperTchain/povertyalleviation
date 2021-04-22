@@ -1,18 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>政策界面</title>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <title>扶贫政策界面</title>
 </head>
-<body>
+<body >
+<!--header-->
+<div class="layui-header my-div-color" id="header">
+    <div class="layui-col-xs2"></div>
+    <div class="layui-col-xs4 layui-col-xs-offset1">
+        <ul>
+            <li><a href="#" name="mdtarget"><i class="layui-icon layui-icon-login-qq my-header-li "></i> </a></li>
+            <li><a href="#"><i class="layui-icon layui-icon-login-wechat my-header-li "></i> </a></li>
+            <li><a href="#"><i class="layui-icon layui-icon-login-weibo my-header-li "></i> </a></li>
+        </ul>
+    </div>
+    <div class="layui-col-xs4">
+    </div>
+    <div class="layui-col-xs2 layui-col-xs-offset3">
+        <a href="/main">
+            <i class="layui-icon layui-icon-user my-header-li my-logo-color "><span
+                    th:text="${session.user !=null ? session.user.userName : '登录'}"></span>
+            </i>
+        </a>
+        <a href="/toregist" class="my-header-li my-logo-color">注册</a>
+    </div>
+</div>
+
+<!--导航栏-->
+<div class="layui-row">
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+        <a href="/index"><img id="povertyallevation-log" src="/static/img/povertyallevation-logo.png"></a>
+    </div>
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4 my-select">
+        <!--搜索框-->
+        <div class="layui-form my-inlinn-div">
+            <select name="TemplateOptions" id="TemplateOptions" lay-verify="required" lay-search>
+                <option value="">请选择或者输入内容</option>
+                <option value="1">水果</option>
+                <option value="2">鸡</option>
+                <option value="3">火鸡</option>
+                <option value="4">element</option>
+                <option value="5">laytpl</option>
+                <option value="6">upload</option>
+                <option value="7">laydate</option>
+                <option value="8">laypage</option>
+                <option value="9">flow</option>
+                <option value="10">util</option>
+                <option value="11">code</option>
+                <option value="12">tree</option>
+                <option value="13">layedit</option>
+                <option value="14">nav</option>
+                <option value="15">tab</option>
+                <option value="16">table</option>
+                <option value="17">select</option>
+                <option value="18">checkbox</option>
+                <option value="19">switch</option>
+                <option value="20">radio</option>
+            </select>
+            <!--    <select name="son_id" id="son_id" lay-filter="son_id" class="layui-select" lay-verify="required" lay-filter="selectTemplate" lay-search>-->
+            <!--        <option value="0"></option>-->
+            <!--        <foreach name="list" item="vo">-->
+            <!--            <option value="{$vo.id}">{$vo.name}</option>-->
+            <!--        </foreach>-->
+            <!--    </select>-->
+        </div>
+        <div class="my-header-li my-select-logo-size my-hover" title="搜索" lay-event="LAYTABLE_SEARCH">
+            <a href=""><si class="layui-icon layui-icon-search" id="indexSearch"></si></a></div>
+    </div>
+    <div class="layui-icon layui-col-xs4 layui-col-sm12 layui-col-md4 layui-icon-cart my-center"><a
+            href="/shoppingcar/toShoppingCar" class="my-hover " target="main">购物车</a></div>
+</div>
+
+<!--选项-->
+<div class="layui-row my-div-color">
+    <div class="layui-col-xs6 layui-col-sm6 layui-col-md4 layui-col-md-offset4">
+        <ul class="layui-nav my-nav my-div-color" lay-filter="">
+            <li class="layui-nav-item my-nav-fontsize layui-this"><a href="/index">首页</a></li>
+            <li class="layui-nav-item  my-nav-fontsize"><a href="javascript:;">商品分类</a>
+                <dl class="layui-nav-child my-font-color"> <!-- 二级菜单 -->
+                    <dd><a href="/product/toFindProductByKind1" target="main">水果</a></dd>
+                    <dd><a href="/product/toFindProductByKind2" target="main">农产品</a></dd>
+                    <dd><a href="/product/toFindProductByKind3" target="main">家畜</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item my-nav-fontsize"><a href="/product/toHotSaleProduct" target="main">热销商品</a></li>
+            <li class="layui-nav-item my-nav-fontsize">
+                <a href="javascript:;">政策法规</a>
+                <dl class="layui-nav-child my-font-color"> <!-- 二级菜单 -->
+                    <dd><a href="/policy/toFindPolicyByPolicyKind1" target="main">国家政策</a></dd>
+                    <dd><a href="/policy/toFindPolicyByPolicyKind2" target="main">扶贫政策</a></dd>
+                    <dd><a href="/policy/toFindPolicyByPolicyKind3" target="main">地方政策</a></dd>
+                </dl>
+            </li>
+            <li class=" layui-nav-item my-nav-fontsize"><a href="mailto:2401700911@qq.com">联系我们</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- 商品部分 -->
+<!-- 内容主体区域 -->
+<!--<iframe name="main" src="/toloadproduct" width="100%" height="1000px"></iframe>-->
+
+<!--轮播图-->
+<div class="layui-carousel" id="test1">
+    <div carousel-item>
+        <div><img id="carousel" src="/static/img/products/pc1.png"></div>
+        <div><img id="carousel" src="/static/img/products/pc2.png"></div>
+        <div><img id="carousel" src="/static/img/products/pc3.png"></div>
+        <div><img id="carousel" src="/static/img/products/pc4.png"></div>
+        <div><img id="carousel" src="/static/img/products/pc5.png"></div>
+    </div>
+</div>
 <div  id="policy" target="main"></div>
 <div style="margin-left:500px;">
     <div id="layuipage"></div>
 </div>
+
+<div class="layui-footer ">
+    <!-- 底部定区域 -->
+    <a href="mailto:2401700911@qq.com" class="layui-icon layui-icon-email ">请联系我</a>
+    <span>Copyright © 2020 AndroThemesAll Rights Reserved.</span>
+    <a href="#mdtarget" id="footer" class="my-md">
+        Back to top</a>
+</div>
 <script type="application/javascript" src="/static/layui/layui.js"></script>
 <script type="application/javascript" src="/static/js/policy/policyList3.js"></script>
+<script>
+    if(window != top){
+        top.location.href=location.href;
+    };
+</script>
 </body>
 </html>

@@ -135,4 +135,12 @@
     <insert id="addRealationship" >
         insert into user_product(productName,userId) values(#{productName},#{userId})
     </insert>
+
+    <!--模糊查询-->
+    <select id="findProductLikeName" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from product where productName like '%${productName}%'
+    </select>
+    <select id="selectCountLikeName" resultType="integer">
+        select count(*) from product where productName like '%${productName}%'
+    </select>
 </mapper>
