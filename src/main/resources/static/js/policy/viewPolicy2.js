@@ -11,7 +11,7 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
 
     var policyId = parent.productid.productid
 
-    var html = layedit.build('txtComment'); //建立编辑器
+    var html = layedit.build('txtComment',{hideTool:true}); //建立编辑器
 
     var content = layedit.getContent(html);
 

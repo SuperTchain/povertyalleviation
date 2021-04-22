@@ -110,6 +110,41 @@ layui.use(['element', 'carousel', 'layer', 'element', 'form', 'laypage'], functi
         });
     }
 
+//模糊查詢
+    function findProductLikeName(textContent, page, limit) {
+        $.ajax({
+            url: '/product/findProductLikeName',
+            data: {"productName":textContent,"page": page, "limit": limit},
+            dataType: 'json',
+            success: function (result) {
+                console.info(result);
+                resCount = result.total;
+                resData = result.item;
+                renderProductHtml(resData);
+            }
+        });
+    }
+
+    $("#indexSearch").click(function () {
+        let textContent = $("#TemplateOptions").val();
+        findProductLikeName(textContent, page, limit);
+        laypage.render({
+            elem: 'layuipage'
+            , count: resCount
+            , limit: limit
+            , limits: [limit]
+            , curr: page
+            , theme: '#FFB800'
+            , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+            , jump: function (obj, first) {
+                console.info(obj);
+                page = obj.curr;
+                if (!first) {
+                    findProductLikeName(textContent, page, limit);
+                }
+            }
+        });
+    })
 
 
 

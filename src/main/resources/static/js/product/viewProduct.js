@@ -66,19 +66,18 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
         }
     })
 
-    // form.on('submit(submit_user)', function (data) {
-    //     $.ajax({
-    //         url: "/shoppingcar/addToShoppingCar",
-    //         type: "post",
-    //         data: data.field,
-    //         success: function (res) {
-    //             if (res.status = 202) {
-    //                 layer.alert("添加成功");
-    //             }
-    //         }
-    //     })
-    //     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-    // });
+    form.on('submit(submit_user)', function (data) {
+        $.ajax({
+            url: "/shoppingcar/addToShoppingCar",
+            type: "post",
+            success: function (res) {
+                if (res.status = 202) {
+                    layer.alert("添加成功");
+                }
+            }
+        })
+        // return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
 
 })
 

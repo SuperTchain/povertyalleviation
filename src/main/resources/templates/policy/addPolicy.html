@@ -14,7 +14,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">政策名称</label>
         <div class="layui-input-block">
-            <input type="text" name="policyTitle" lay-verify="title" lay-reqtext="不能为空哦" autocomplete="off" placeholder="请输入政策名称"
+            <input type="text" name="policyTitle" lay-verify="required" lay-reqtext="不能为空哦" autocomplete="off" placeholder="请输入政策名称"
                    class="layui-input">
         </div>
     </div>
@@ -36,9 +36,9 @@
         <div class="layui-input-block">
             <select name="policyKind" lay-verify="required">
                 <option value=""></option>
-                <option value="0">水果</option>
-                <option value="1">农政策</option>
-                <option value="2">家畜</option>
+                <option value="0">国家政策</option>
+                <option value="1">扶贫政策</option>
+                <option value="2">地方政策</option>
             </select>
         </div>
     </div>

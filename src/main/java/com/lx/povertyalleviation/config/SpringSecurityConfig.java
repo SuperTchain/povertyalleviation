@@ -80,7 +80,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**","/login.html","/index.html","/forget.html","/regist","/toregist","/search","/webjars/**","/getCode","/login","/","/index",
                         "/getValidateCode","/updatePwd","/product/findAllProduct","/toloadproduct","/user/toShoppingCar","/product/toHotSaleProduct",
                         "/product/toFindProductByKind1","/product/toFindProductByKind2","/product/toFindProductByKind3","/policy/toFindPolicyByPolicyKind1","/policy/toFindPolicyByPolicyKind2","/policy/toFindPolicyByPolicyKind3",
-                        "/product/toViewProduct","/product/findProductByCondition","/product/findProductById","/policy/toViewPolicy","/policy/findPolicyById","/policy/findPolicyByPolicyKind","/findProductLikeCondition","/product/findProductLike","/product/findProductLikeName"
+                        "/product/toViewProduct","/product/findProductByCondition","/product/findProductById","/policy/toViewPolicy","/policy/findPolicyById","/policy/findPolicyByPolicyKind","/findProductLikeCondition","/product/findProductLike",
+                        "/product/findProductLikeName","/product/toIntroduceProduct"
                         ).permitAll()
 //                拦截所有页面
 //                .antMatchers("/**").hasAnyRole("USER")

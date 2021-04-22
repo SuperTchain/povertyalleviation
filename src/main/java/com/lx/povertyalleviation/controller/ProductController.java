@@ -145,6 +145,12 @@ public class ProductController {
         return "product/animalProduct";
     }
 
+    @GetMapping("/toIntroduceProduct")
+    @ApiOperation(value = "跳转到产品介绍界面")
+    public String  toIntroduceProduct(){
+        return "product/introduceProduct";
+    }
+
     /**
      * 查询所有产品信息
      *
@@ -403,4 +409,5 @@ public class ProductController {
         Result result = productService.findProductLikeName(productName,page, limit);
         return result;
     }
+
 }

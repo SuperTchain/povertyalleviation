@@ -19,8 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -116,7 +119,7 @@ public class ShoppingCarController {
     @ResponseBody
     @Transactional(rollbackFor=Exception.class)
     @RecordOperation(name = "添加购物车",url = "/shoppingcar/addToShoppingCar")
-    public String addToShoppingCar(ShoppingCar shoppingCar, HttpSession session) {
+    public HttpServletResponse addToShoppingCar(ShoppingCar shoppingCar, HttpSession session,HttpServletResponse response) throws IOException {
         Result result = new Result();
         Integer userId = (Integer) session.getAttribute("userId");
         String msg=null;
@@ -124,14 +127,19 @@ public class ShoppingCarController {
             //将Id作为key 商品Id作为filed product作为value
             boolean b = redisUtil.hset(String.valueOf(userId), String.valueOf(shoppingCar.getId()), shoppingCar);
             if(true==b){
-                msg="添加成功";
+                result.setStatus(200);
+                result.setMessage("添加成功");
             }
         } catch (Exception e) {
             logger.error( "error"+e.getMessage());
-            msg="添加失败";
+            result.setStatus(500);
+            result.setMessage("添加失败");
         }
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().write("<script>alert('添加成功'); window.location.href = '/index';; window.close();</script>");
+        response.getWriter().flush();
         logger.info(redisUtil.hgetAll(String.valueOf(shoppingCar.getId())));
-        return msg;
+        return response;
     }
 
 
