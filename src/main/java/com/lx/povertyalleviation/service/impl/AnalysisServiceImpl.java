@@ -1,6 +1,7 @@
 package com.lx.povertyalleviation.service.impl;
 
 import com.lx.povertyalleviation.dao.AnalysisDao;
+import com.lx.povertyalleviation.pojo.Order;
 import com.lx.povertyalleviation.service.AnalysisService;
 import com.lx.povertyalleviation.utils.Result;
 import org.apache.log4j.Logger;
@@ -52,9 +53,9 @@ public class AnalysisServiceImpl implements AnalysisService {
             startTime= timeArray[0].trim();
             endTime= timeArray[1].trim();
         }
-        String productName = analysisDao.analysisProduct(startTime, endTime);
+        Order order = analysisDao.analysisProduct(startTime, endTime);
         result.setStatus(200);
-        result.setItem(productName);
+        result.setItem(order);
         return result;
     }
 }

@@ -1,5 +1,6 @@
 package com.lx.povertyalleviation.dao;
 
+import com.lx.povertyalleviation.pojo.Composition;
 import com.lx.povertyalleviation.pojo.Product;
 import com.lx.povertyalleviation.pojo.ShoppingCar;
 import com.lx.povertyalleviation.pojo.User;
@@ -130,4 +131,10 @@ public interface ProductDao {
     List<Product> findProductLikeName(@Param("productName") String productName, @Param("start") Integer start, @Param("limit") Integer limit);
 
     Integer selectCountLikeName(String productName);
+
+    List<Composition> findCompositionList(Integer start, Integer limit);
+
+    Integer selectCountOfCm();
+
+    void decreateByProductName(Integer id);
 }

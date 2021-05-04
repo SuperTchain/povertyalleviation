@@ -1,5 +1,6 @@
 package com.lx.povertyalleviation.dao;
 
+import com.lx.povertyalleviation.pojo.Order;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
@@ -13,5 +14,5 @@ public interface AnalysisDao {
 
     BigDecimal findPartOfSale(@Param("days1") String days1,@Param("days2") String days2);
 
-    String analysisProduct(@Param("startTime") String startTime, @Param("endTime") String endTime);
+    Order analysisProduct(@Param("startTime") String startTime, @Param("endTime") String endTime);
 }

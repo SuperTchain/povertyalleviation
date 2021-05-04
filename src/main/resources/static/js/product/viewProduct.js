@@ -60,22 +60,34 @@ layui.use(['laypage', 'layer', 'carousel', 'table', 'form', 'element', 'laydate'
                 // } catch (e) {
                 //     $("#productDate").val(d);
                 // }
-                $("#productImgName").attr('src',"/static/img/products/"+res.item.productImgName);
+                $("#productImgName").attr('src', "/static/img/products/" + res.item.productImgName);
             }
             form.render()
         }
     })
 
     form.on('submit(submit_user)', function (data) {
-        $.ajax({
-            url: "/shoppingcar/addToShoppingCar",
-            type: "post",
-            success: function (res) {
-                if (res.status = 202) {
-                    layer.alert("添加成功");
+        let buyCount = $("#buyCount").val();
+        let productNumber = $("#productNumber").val();
+        if (buyCount == 0) {
+            layer.alert("请输入购买数量");
+            return false;
+        }
+
+        if (buyCount <= productNumber) {
+            $.ajax({
+                url: "/shoppingcar/addToShoppingCar",
+                type: "post",
+                success: function (res) {
+                    if (res.status = 202) {
+                        layer.alert("添加成功");
+                    }
                 }
-            }
-        })
+            })
+        }else {
+            layer.alert("请输入正确的购买数量")
+            return false;
+        }
         // return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
 

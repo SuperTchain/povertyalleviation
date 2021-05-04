@@ -118,7 +118,7 @@ layui.use(['laypage', 'layer', 'table', 'form', 'element', 'laydate'], function(
             success: function (res) {
                 if (res.status == 200) {
                     //index：layui便于记录弹框的索引
-                    layer.alert("下月热销产品可能是:"+res.item, function (index) {
+                    layer.alert("下月热销产品可能是:"+res.item.productionAddress+"的"+res.item.productName, function (index) {
                         layer.close(index);//关闭弹框
                     })
                 }

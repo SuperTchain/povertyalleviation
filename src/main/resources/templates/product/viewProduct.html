@@ -65,7 +65,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">余量:</label>
             <div class="layui-input-block">
-                <input type="text" name="productNumber" lay-verify="number" autocomplete="off" readonly="readonly"
+                <input type="text" name="productNumber" id="productNumber" lay-verify="number" autocomplete="off" readonly="readonly"
                        class="layui-input">
             </div>
         </div>
@@ -87,7 +87,7 @@
         <div class="layui-form-item" style="margin-left: 600px">
             <label class="layui-form-label" >请输入数量:</label>
             <div class="layui-input-block" >
-                <input type="text" name="buyCount" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="buyCount" id="buyCount" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div style="display: none" id="productId" th:text="${session.productId}"></div>

@@ -70,6 +70,10 @@ public class Order implements Serializable {
     @ApiModelProperty(value = "是否发货0未发 1已发")
     private Integer delivery;
 
+
+    @ApiModelProperty(value = "产品地址")
+    private String productionAddress;
+
     @Override
     public String toString() {
         return "Order{" +
@@ -85,7 +89,16 @@ public class Order implements Serializable {
                 ", address='" + address + '\'' +
                 ", orderPrice=" + orderPrice +
                 ", delivery=" + delivery +
+                ", productionAddress='" + productionAddress + '\'' +
                 '}';
+    }
+
+    public String getProductionAddress() {
+        return productionAddress;
+    }
+
+    public void setProductionAddress(String productionAddress) {
+        this.productionAddress = productionAddress;
     }
 
     public Integer getDelivery() {

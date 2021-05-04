@@ -1,9 +1,8 @@
 package com.lx.povertyalleviation.service.impl;
 
 import com.lx.povertyalleviation.dao.ProductDao;
+import com.lx.povertyalleviation.pojo.Composition;
 import com.lx.povertyalleviation.pojo.Product;
-import com.lx.povertyalleviation.pojo.ShoppingCar;
-import com.lx.povertyalleviation.pojo.User;
 import com.lx.povertyalleviation.service.ProductService;
 import com.lx.povertyalleviation.utils.Result;
 import org.apache.log4j.Logger;
@@ -235,6 +234,21 @@ public class ProductServiceImpl implements ProductService {
         result.setItem(products);
         //查询产品的总个数
         Integer count = productDao.selectCountLikeName(productName);
+        result.setTotal(count);
+        return result;
+    }
+
+    @Override
+    public Result findCompositionList(Integer page, Integer limit) {
+        //计算查询的起始位置
+        Integer start = (page - 1) * limit;
+        Result result = new Result();
+        //分页查询所有产品集合
+        List<Composition> products = productDao.findCompositionList(start, limit);
+        logger.info(products.toString());
+        result.setItem(products);
+        //查询产品的总个数
+        Integer count = productDao.selectCountOfCm();
         result.setTotal(count);
         return result;
     }

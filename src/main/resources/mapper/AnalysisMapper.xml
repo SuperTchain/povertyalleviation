@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lx.povertyalleviation.dao.AnalysisDao">
 
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lx.povertyalleviation.pojo.Order">
+        <id column="id" property="id" />
+        <result column="orderCreateTime" property="orderCreateTime" />
+        <result column="orderDeliveryTime" property="orderDeliveryTime" />
+        <result column="productName" property="productName" />
+        <result column="number" property="number" />
+        <result column="orderStatus" property="orderStatus" />
+        <result column="userId" property="userId" />
+        <result column="payStatus" property="payStatus" />
+        <result column="orderEndTime" property="orderEndTime" />
+        <result column="address" property="address" />
+        <result column="delivery" property="delivery" />
+        <result column="orderPrice" property="orderPrice" />
+        <result column="productionAddress" property="productionAddress" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, orderCreateTime, orderDeliveryTime, productName, `number`, orderStatus, userId, payStatus, orderEndTime, address,delivery,orderPrice,productionAddress
+    </sql>
+
     <select id="findAllSaleOfMonth" resultType="decimal">
         select sum(orderPrice) from `order` where orderStatus=1
     </select>
@@ -10,8 +33,8 @@
         select sum(orderPrice) from `order` where orderCreateTime between #{days1} and #{days2} and orderStatus=1
     </select>
 
-    <select id="analysisProduct" resultType="string">
-        select productName, count(*) from `order`
+    <select id="analysisProduct" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>, count(*) from `order`
         <where>
             <if test="startTime!=null and endTime!=null">
                 and orderCreateTime between #{startTime} and #{endTime} and orderStatus=1

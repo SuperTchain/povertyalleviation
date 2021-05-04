@@ -16,6 +16,12 @@
         <result column="hotSaleStatus" property="hotSaleStatus" />
     </resultMap>
 
+    <resultMap id="Composition" type="com.lx.povertyalleviation.pojo.Composition">
+        <id column="id" property="id" />
+        <result column="productName" property="productName" />
+        <result column="productComposition" property="productComposition" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, productName, productPrice, productionAddress, productNumber, productDesc, productStatus,productImgName,productKind,hotSaleStatus
@@ -143,4 +149,14 @@
     <select id="selectCountLikeName" resultType="integer">
         select count(*) from product where productName like '%${productName}%'
     </select>
+
+    <select id="findCompositionList" resultMap="Composition">
+        select * from composition limit #{param1},#{param2}
+    </select>
+    <select id="selectCountOfCm" resultType="integer">
+        select count(*) from composition
+    </select>
+    <update id="decreateByProductName">
+        update product set productNumber=productNumber-1 where id=#{id}
+    </update>
 </mapper>

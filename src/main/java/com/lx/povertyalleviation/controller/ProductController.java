@@ -171,6 +171,27 @@ public class ProductController {
         return result;
     }
 
+
+    /**
+     * 查询产品的营养信息
+     *
+     * @param page  页数
+     * @param limit 每页条数
+     * @return 封装结果
+     */
+    @PostMapping("/findCompositionList")
+    @ResponseBody
+    @ApiOperation(value = "查询产品的营养信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页数"),
+            @ApiImplicitParam(name = "limit", value = "每页页数")
+    })
+    @RecordOperation(name = "查询产品的营养信息",url = "/product/findCompositionList")
+    public Result findCompositionList(Integer page, Integer limit) {
+        Result result = productService.findCompositionList(page, limit);
+        return result;
+    }
+
     /**
      * 根据传入条件查询产品信息
      *

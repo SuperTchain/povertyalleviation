@@ -16,11 +16,12 @@
         <result column="address" property="address" />
         <result column="delivery" property="delivery" />
         <result column="orderPrice" property="orderPrice" />
+        <result column="productionAddress" property="productionAddress" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, orderCreateTime, orderDeliveryTime, productName, `number`, orderStatus, userId, payStatus, orderEndTime, address,delivery,orderPrice
+        id, orderCreateTime, orderDeliveryTime, productName, `number`, orderStatus, userId, payStatus, orderEndTime, address,delivery,orderPrice,productionAddress
     </sql>
 
     <!--分页查询所有订单信息-->
@@ -62,8 +63,8 @@
     </select>
     <!--添加订单-->
     <insert id="addOrder" parameterType="com.lx.povertyalleviation.pojo.Order">
-        insert into `order`(orderCreateTime, orderDeliveryTime, productName, number, orderStatus, userId, payStatus, orderEndTime, address,orderPrice)
-        values(#{orderCreateTime},#{orderDeliveryTime},#{productName},#{number},#{orderStatus},#{userId},#{payStatus},#{orderEndTime},#{address},#{orderPrice})
+        insert into `order`(orderCreateTime, orderDeliveryTime, productName, number, orderStatus, userId, payStatus, orderEndTime, address,orderPrice,productionAddress)
+        values(#{orderCreateTime},#{orderDeliveryTime},#{productName},#{number},#{orderStatus},#{userId},#{payStatus},#{orderEndTime},#{address},#{orderPrice},#{productionAddress})
     </insert>
     <!--根据订单Id查询该订单信息-->
     <select id="findOrderById" resultMap="BaseResultMap">

@@ -70,4 +70,6 @@ public interface ProductService {
     Result findProductListById(Integer userId, Integer page, Integer limit);
 
     Result findProductLikeName(String productName, Integer page, Integer limit);
+
+    Result findCompositionList(Integer page, Integer limit);
 }
