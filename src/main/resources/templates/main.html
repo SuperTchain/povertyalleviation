@@ -24,7 +24,7 @@
                     <li class="layui-nav-item"><a href="/order/toOrdertListOfSales" target="main" sec:authorize="hasRole('ROLE_SALES')">订单列表</a></li>
                     <li class="layui-nav-item"><a href="/order/toOrdertListOfUser" target="main" sec:authorize="hasRole('ROLE_USER')">订单列表</a></li>
                     <li class="layui-nav-item"><a href="/shoppingcar/toShoppingCar" target="main" sec:authorize="hasRole('ROLE_USER')">购物车管理</a></li>
-                    <li class="layui-nav-item"><a href="/role/toRoleList" target="main" sec:authorize="hasRole('ROLE_USER')">角色管理</a></li>
+                    <li class="layui-nav-item"><a href="/role/toRoleList" target="main" sec:authorize="hasRole('ROLE_ADMIN')">角色管理</a></li>
                     <li class="layui-nav-item"><a href="/policy/toPolicyList" target="main" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGE')">政策管理</a></li>
 <!--                    <li class="layui-nav-item">-->
 <!--                        <dl class="layui-nav-child">-->
